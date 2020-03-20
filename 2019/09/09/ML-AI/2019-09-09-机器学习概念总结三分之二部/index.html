@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狼哥空间" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="过拟合 随着训练过程的进行，在训练集上的错误率渐渐减小，但是在验证集上的错误率却反而渐渐增大。也就是说训练出来的网络过拟合了训练集，对训练集外的数据却不工作。 过拟合是一种在项目实践中遇到的一个常见的现象，并不是一种高深的理论。“简单函数的泛化能力更好”不是一个有着坚实理论和数学基础的理论定理，它只是在长久的数据科学项目中，数据科学家们发现的一个普遍现象。可以理解为属于 经验科学 的一个范畴，">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习概念总结三分之二部">
+<meta property="og:url" content="https://wolfbrother.github.io/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之二部/index.html">
+<meta property="og:site_name" content="狼哥空间">
+<meta property="og:description" content="过拟合 随着训练过程的进行，在训练集上的错误率渐渐减小，但是在验证集上的错误率却反而渐渐增大。也就是说训练出来的网络过拟合了训练集，对训练集外的数据却不工作。 过拟合是一种在项目实践中遇到的一个常见的现象，并不是一种高深的理论。“简单函数的泛化能力更好”不是一个有着坚实理论和数学基础的理论定理，它只是在长久的数据科学项目中，数据科学家们发现的一个普遍现象。可以理解为属于 经验科学 的一个范畴，">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-20T06:11:23.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习概念总结三分之二部">
+<meta name="twitter:description" content="过拟合 随着训练过程的进行，在训练集上的错误率渐渐减小，但是在验证集上的错误率却反而渐渐增大。也就是说训练出来的网络过拟合了训练集，对训练集外的数据却不工作。 过拟合是一种在项目实践中遇到的一个常见的现象，并不是一种高深的理论。“简单函数的泛化能力更好”不是一个有着坚实理论和数学基础的理论定理，它只是在长久的数据科学项目中，数据科学家们发现的一个普遍现象。可以理解为属于 经验科学 的一个范畴，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wolfbrother.github.io/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之二部/">
+
+
+
+
+
+  <title>机器学习概念总结三分之二部 | 狼哥空间</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狼哥空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">虚怀若谷，求知若渴</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wolfbrother.github.io/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之二部/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wolfbrother">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狼哥空间">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习概念总结三分之二部</h2>
+        
+
+        <div class="post-meta">
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-09T00:00:00+08:00">
+                2019-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ML-AI/" itemprop="url" rel="index">
+                    <span itemprop="name">ML-AI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之二部/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之二部/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="过拟合">过拟合</h2>
+<p>随着训练过程的进行，在训练集上的错误率渐渐减小，但是在验证集上的错误率却反而渐渐增大。也就是说训练出来的网络过拟合了训练集，对训练集外的数据却不工作。</p>
+<p>过拟合是一种在项目实践中遇到的一个常见的现象，并不是一种高深的理论。“简单函数的泛化能力更好”不是一个有着坚实理论和数学基础的理论定理，它只是在长久的数据科学项目中，数据科学家们发现的一个普遍现象。可以理解为属于 经验科学 的一个范畴，简单的模型不容易产生过拟合，简单的模型泛化能力更好，甚至所谓的奥卡姆剃刀原理。这个经验在很多时候是有效的，我们也没有什幺理由不去应用这个经验。毕竟数据科学还是一个偏向实践和以结果说话的学科，得到好的结果是最重要的。</p>
+<p>过拟合的原因 （<a href="https://zhuanlan.zhihu.com/p/26122044" target="_blank" rel="noopener">大白话解释模型产生过拟合的原因</a>有具体的例子，<a href="https://flashgene.com/archives/11824.html" target="_blank" rel="noopener">浅议过拟合现象(overfitting)以及正则化技术原理</a>）： + 数据有噪声 + 训练数据不足，在有限的样本中搜索过大的模型空间 + 训练模型过度导致模型非常复杂</p>
+<p>避免过拟合的方法 （<a href="https://zhuanlan.zhihu.com/p/26122044" target="_blank" rel="noopener">大白话解释模型产生过拟合的原因</a>）：</p>
+<ul>
+<li>early stopping</li>
+<li>数据集扩增（Data augmentation）</li>
+<li>正则化（Regularization）包括L1、L2（L2 regularization也叫weight decay）</li>
+<li>dropout (<a href="https://www.cnblogs.com/alexanderkun/p/6922428.html" target="_blank" rel="noopener">正则化为什么能防止过拟合</a>)。</li>
+<li>最大池化层（maxpool）</li>
+</ul>
+<p>其它：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/a9cc62db419e" target="_blank" rel="noopener">正则化为什么能防止过拟合</a> 直观地说明了在多项式拟合里，为什么过拟合的系数比较大，进而说明正则化（不管是L1还是L2都能让参数趋于小）对过拟合有用：过拟合，就是拟合函数需要顾忌每一个点，最终形成的拟合函数波动很大。在某些很小的区间里，函数值的变化很剧烈。这就意味着函数在某些小区间里的导数值（绝对值）非常大，由于自变量值可大可小，所以只有系数足够大，才能保证导数值很大。</li>
+<li>术语&quot;泛化&quot;指的是一个假设模型能够应用到新样本的能力。新样本数据是指没有出现在训练集中的数据。</li>
+</ul>
+<h4 id="高偏差与高方差"><a href="https://www.jianshu.com/p/a585d5506b1e" target="_blank" rel="noopener">高偏差与高方差</a></h4>
+<ul>
+<li>过拟合意味着高方差，欠拟合意味着高偏差（https://www.cnblogs.com/jianxinzhou/p/4083921.html ）</li>
+<li>偏差（bias）：我们要预测第二天的收益，而估值指标经常用于长线投资，虽然每次预测都是信誓旦旦，但是模型从本质上就把目标搞错了。</li>
+<li>方差（variance）：过多的已知条件，导致模型无法给出确定的预测，预测结果和瞎蒙一样，给人的感觉是不靠谱。</li>
+<li>无法消除的误差：我们都知道，完美预测第二天的情况，是不可能的。这样的误差难以消除，我们希望它越小越好，一般就忽略掉了。所以，我们可以优化的误差=偏差+方差 相关描述可以看一下知乎答案：<a href="https://www.zhihu.com/question/20700829/answer/119314862" target="_blank" rel="noopener">链接</a></li>
+</ul>
+<h2 id="贝叶斯学派和频率学派">贝叶斯学派和频率学派</h2>
+<ul>
+<li>先验概率、似然函数与后验概率</li>
+</ul>
+<p>似然函数（likelihood function），也称作似然，是一个关于统计模型参数的函数。也就是这个函数中自变量是统计模型的参数。对于结果 x ，在参数集合 θ 上的似然，就是在给定这些参数值的基础上，观察到的结果的概率 <span class="math inline">\(L(θ\mid x)=P(x\mid θ)\)</span>。也就是说，似然是关于参数的函数，在参数给定的条件下，对于观察到的 x 的值的条件分布。</p>
+<p>用<span class="math inline">\((θ)\)</span>表示概率分布函数，用 <span class="math inline">\(p(x\mid θ)\)</span>表示观测值 x 的似然函数。后验概率定义为： <span class="math inline">\(p(θ\mid x)=\frac{p(x\mid θ)p(θ)}{p(x)}\)</span> 。由于分母不变，可以表达成如下正比关系： 后验概率<span class="math inline">\(p(θ\mid x)\)</span> ∝ 似然函数<span class="math inline">\(p(x\mid θ)\)</span>×先验概率p(x)</p>
+<p><a href="https://www.cnblogs.com/wjgaas/p/4523779.html" target="_blank" rel="noopener">先验概率、似然函数与后验概率</a> 最大后验概率和极大似然估计很像，只是多了一项先验分布，它体现了贝叶斯认为参数也是随机变量的观点，在实际运算中通常通过超参数给出先验分布。极大似然估计和最大后验概率都是参数的点估计。在频率学派中，参数固定了，预测值也就固定了。最大后验概率是贝叶斯学派的一种近似手段，因为完全贝叶斯估计不一定可行。另一方面，最大后验概率可以看作是对先验和MLE的一种折衷，如果数据量足够大，最大后验概率和最大似然估计趋向于一致，如果数据为0,最大后验仅由先验决定。</p>
+<p>用抛硬币的例子来依次讲解极大似然估计、最大后验概率估计和贝叶斯估计：<a href="https://blog.csdn.net/yangliuy/article/details/8296481" target="_blank" rel="noopener">链接</a></p>
+<h2 id="拉格朗日乘子法">拉格朗日乘子法</h2>
+<p>分为只含有等式约束，以及含有不等式约束两种情况。</p>
+<h4 id="只有等式约束">只有等式约束</h4>
+<p>参考 维基百科<a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0" target="_blank" rel="noopener">拉格朗日乘数</a>。例如如下特征，即目标函数取极值时目标函数和各个等式约束的在该极值处相切，即它们在极值处梯度方向相等或者相反，即它们的各个偏导数成比例关系。</p>
+<p>举例：<span class="math inline">\(f(x,y)\)</span>在<span class="math inline">\(g(x,y) = c\)</span>约束下的极值问题，则极值点<span class="math inline">\((x_0,y_0)\)</span>处有<span class="math inline">\(f_x+\lambda g_x = 0, f_y+\lambda g_y=0\)</span>，同时有<span class="math inline">\(g(x_0,y_0)=c\)</span>。因此就将原来的约束优化问题，转换成如下拥有三个自变量<span class="math inline">\((x,y,\lambda)\)</span>的无约束极值问题 <span class="math inline">\(f(x,y)+\lambda (g(x,y)-c)\)</span>，其中<span class="math inline">\(\lambda\)</span>任意取值。</p>
+<p>对该无约束问题进行分析，由于<span class="math inline">\(\lambda\)</span>可以任意取值，因此只能由<span class="math inline">\(g(x,y)-c=0\)</span>，另外取极值时梯度为0，即<span class="math inline">\(f&#39;+\lambda g&#39;=0\)</span>，可见于原约束优化问题是等价的。</p>
+<p>其中原约束优化问题是“原始问题”，转换后的无约束优化问题是“对偶问题”，二者最优解等价的条件就是取该最优解时满足<span class="math inline">\(f&#39;+\lambda g&#39;=0\)</span>和<span class="math inline">\(g=c\)</span>。</p>
+<h4 id="含有不等式约束">含有不等式约束</h4>
+<p>参考《统计学习方法》附录C的“<a href="https://zhuanlan.zhihu.com/p/38182879" target="_blank" rel="noopener">拉格朗日对偶性</a>”，关于原始问题和对偶问题的最优解相等的时候该最优解必须满足的KKT条件。</p>
+<p>参考等式约束情况下原始问题到对偶问题的转化，以及最优解需满足的KKT条件（包含两部分，原始问题的约束条件，以及梯度条件）。</p>
+<h4 id="对偶问题和kkt条件">对偶问题和KKT条件</h4>
+<p>猜测引入对偶问题的原因，是方便推导出KKT条件，进而通过求解KKT条件来求解原始问题。</p>
+<h2 id="共轭先验">共轭先验</h2>
+<p>在贝叶斯统计中，如果后验分布与先验分布属于同类，则先验分布与后验分布被称为共轭分布，而先验分布被称为似然函数的共轭先验。共轭先验的好处主要在于代数上的方便性，可以直接给出后验分布的封闭形式，否则的话只能数值计算。共轭先验也有助于获得关于似然函数如何更新先验分布的直观印象。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag">#机器学习</a>
+          
+          <a href="https://github.com/wolfbrother/wolfbrother.github.io/blob/hexo/source/_posts/ML-AI/2019-09-09-机器学习概念总结三分之二部.md" rel="tag" target="_blank">&#64gitRepo</a>
+        </div>
+      
+
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/09/algs/general/2019-09-10-排序算法/" rel="next" title="排序算法">
+                <i class="fa fa-chevron-left"></i> 排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之三部/" rel="prev" title="机器学习概念总结三分之三部">
+                机器学习概念总结三分之三部 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="wolfbrother">
+            
+              <p class="site-author-name" itemprop="name">wolfbrother</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wolfbrother/wolfbrother.github.io/issues" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:jlxufly@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#过拟合"><span class="nav-number">1.</span> <span class="nav-text">过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高偏差与高方差"><span class="nav-number">1.0.1.</span> <span class="nav-text">高偏差与高方差</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯学派和频率学派"><span class="nav-number">2.</span> <span class="nav-text">贝叶斯学派和频率学派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉格朗日乘子法"><span class="nav-number">3.</span> <span class="nav-text">拉格朗日乘子法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#只有等式约束"><span class="nav-number">3.0.1.</span> <span class="nav-text">只有等式约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#含有不等式约束"><span class="nav-number">3.0.2.</span> <span class="nav-text">含有不等式约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对偶问题和kkt条件"><span class="nav-number">3.0.3.</span> <span class="nav-text">对偶问题和KKT条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共轭先验"><span class="nav-number">4.</span> <span class="nav-text">共轭先验</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狼哥空间</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'iKewncyt21DH3cd1bESqHH10-gzGzoHsz',
+        appKey: 'EpCP2TXQXUIm4jMMbzLk3r0u',
+        placeholder: '(>﹏<) Just show your thinking~',
+        avatar:'monsterid',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

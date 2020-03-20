@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="WolfBrother, 技术">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="狼哥空间" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="首先创建一棵树，用于测试      A    /   \   B     C  /    /   \ D    E     F       \   / \        G H   I 建树语句： 1234567891011121314class TreeNode:    def __init__(self, x):        self.val = x        self">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树的遍历：递归、非递归和分层">
+<meta property="og:url" content="https://wolfbrother.github.io/2019/09/09/algs/general/2019-09-二叉树的遍历：递归、非递归和分层/index.html">
+<meta property="og:site_name" content="狼哥空间">
+<meta property="og:description" content="首先创建一棵树，用于测试      A    /   \   B     C  /    /   \ D    E     F       \   / \        G H   I 建树语句： 1234567891011121314class TreeNode:    def __init__(self, x):        self.val = x        self">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-20T06:11:23.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树的遍历：递归、非递归和分层">
+<meta name="twitter:description" content="首先创建一棵树，用于测试      A    /   \   B     C  /    /   \ D    E     F       \   / \        G H   I 建树语句： 1234567891011121314class TreeNode:    def __init__(self, x):        self.val = x        self">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wolfbrother.github.io/2019/09/09/algs/general/2019-09-二叉树的遍历：递归、非递归和分层/">
+
+
+
+
+
+  <title>二叉树的遍历：递归、非递归和分层 | 狼哥空间</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狼哥空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">虚怀若谷，求知若渴</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wolfbrother.github.io/2019/09/09/algs/general/2019-09-二叉树的遍历：递归、非递归和分层/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wolfbrother">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狼哥空间">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">二叉树的遍历：递归、非递归和分层</h2>
+        
+
+        <div class="post-meta">
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-09T00:00:00+08:00">
+                2019-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/刷题/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/09/algs/general/2019-09-二叉树的遍历：递归、非递归和分层/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/09/algs/general/2019-09-二叉树的遍历：递归、非递归和分层/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先创建一棵树，用于测试</p>
+<pre><code>     A
+   /   \
+  B     C
+ /    /   \
+D    E     F
+      \   / \
+       G H   I</code></pre>
+<p>建树语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class TreeNode:</span><br><span class="line">    def __init__(self, x):</span><br><span class="line">        self.val = x</span><br><span class="line">        self.left = None</span><br><span class="line">        self.right = None</span><br><span class="line"></span><br><span class="line">L = &#123;&apos;A&apos;: TreeNode(&apos;A&apos;),&apos;B&apos;: TreeNode(&apos;B&apos;),&apos;C&apos;: TreeNode(&apos;C&apos;),&apos;D&apos;: TreeNode(&apos;D&apos;), &apos;E&apos;: TreeNode(&apos;E&apos;), &apos;F&apos;: TreeNode(&apos;F&apos;),&apos;G&apos;: TreeNode(&apos;G&apos;), &apos;H&apos;: TreeNode(&apos;H&apos;), &apos;I&apos;: TreeNode(&apos;I&apos;)&#125;</span><br><span class="line"></span><br><span class="line">L[&apos;F&apos;].left, L[&apos;F&apos;].right = L[&apos;H&apos;], L[&apos;I&apos;]</span><br><span class="line">L[&apos;E&apos;].right = L[&apos;G&apos;]</span><br><span class="line">L[&apos;C&apos;].left, L[&apos;C&apos;].right = L[&apos;E&apos;], L[&apos;F&apos;]</span><br><span class="line">L[&apos;A&apos;].left, L[&apos;A&apos;].right = L[&apos;B&apos;], L[&apos;C&apos;]</span><br><span class="line">L[&apos;B&apos;].left = L[&apos;D&apos;]</span><br><span class="line">root = L[&apos;A&apos;]</span><br></pre></td></tr></table></figure>
+<h2 id="递归遍历">递归遍历</h2>
+<p>递归遍历用了递归，不借助于栈和队列。而循环遍历要用到栈，分层遍历要用到队列。</p>
+<h3 id="先根遍历">先根遍历</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [] <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span>  [root.val] + preroot(root.left) + preroot(root.right)</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<blockquote>
+<p>['A', 'B', 'D', 'C', 'E', 'G', 'F', 'H', 'I']</p>
+</blockquote>
+<h3 id="中根遍历">中根遍历</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">midroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [] <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> midroot(root.left) + [root.val] + midroot(root.right)</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<blockquote>
+<p>['D', 'B', 'A', 'E', 'G', 'C', 'H', 'F', 'I']</p>
+</blockquote>
+<h3 id="后根遍历">后根遍历</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">postroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [] <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">else</span> postroot(root.left) + postroot(root.right) + [root.val]</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<blockquote>
+<p>['D', 'B', 'G', 'E', 'H', 'I', 'F', 'C', 'A']</p>
+</blockquote>
+<h2 id="非递归遍历">非递归遍历</h2>
+<p>非递归遍历就是循环遍历，要用到栈，而非队列；而层次遍历要用队列，而非栈。一个直观解释：</p>
+<ul>
+<li>从递归遍历的代码可以看出遍历序列的一个性质：深度优先遍历（包括先序、中序和后序）的打印序列，节点、其左子树序列和右子树序列这三者不会有两两交叉，即节点不会在其左子树或右子树序列里被打印，其左子树和右子树序列也是分开的。而且，打印序列里的左子树序列总是位于右子树序列之前。</li>
+<li>遍历树结构时，总是先拿到节点，然后才能拿到其孩子。
+<ul>
+<li>对于中序、后序遍历里的节点和左子树，节点总是先被添加进该数据结构，等待左子树所有节点被打印之后，才会把该节点取出并打印。显然该数据结构是栈而非队列。</li>
+<li>对于先序如果该数据结构用队列，每个循环访问一个队列元素，而且左右孩子都要添加进队列，那么势必有节点的左孩子的孩子节点位列该节点的右孩子之后，而队列里位置先后意味着访问顺序的先后。</li>
+</ul></li>
+<li>而层次遍历可以先进来先打印，故要用队列，而不是栈。</li>
+</ul>
+<p>难点：</p>
+<ul>
+<li>三个概念：拿到节点，访问节点，打印节点。
+<ul>
+<li>拿到节点，是节点首次进栈，有的程序一个节点只进栈一次</li>
+<li>访问节点，是从栈里读取（不出栈）或者抛出节点</li>
+<li>打印节点，是从栈里抛出节点并打印</li>
+</ul></li>
+<li>先根遍历里，拿到节点先入栈；第一次访问时，就打印节点值并将其从栈里抛出并将其两个孩子节点压入栈，因此只访问一次。</li>
+<li>在中根和后根遍历里，拿到节点之后先入栈。第一次访问节点并不打印其值，而是先入栈其左孩子节点，或者全部的两个孩子节点。第二次访问是才要抛出栈并打印，如果右孩子在第一次访问时未入栈，则还要入栈其右孩子节点。由于两访问时的操作不同，需要对该访问次数有个记录才行。</li>
+</ul>
+<h3 id="先根遍历-1">先根遍历</h3>
+<p>抛出栈并打印节点值后，先入栈右孩子，再入栈左孩子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">npreroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    res = []</span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    stack.append(root)</span><br><span class="line">    <span class="keyword">while</span> len(stack) &gt; <span class="number">0</span>:</span><br><span class="line">        node = stack.pop(<span class="number">-1</span>)  </span><br><span class="line">        res.append(node.val)</span><br><span class="line">        <span class="keyword">if</span> node.right:</span><br><span class="line">            stack.append(node.right)</span><br><span class="line">        <span class="keyword">if</span> node.left:</span><br><span class="line">            stack.append(node.left)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="中根遍历-1">中根遍历</h3>
+<h4 id="节点和状态绑定执行入栈出栈">节点和状态绑定执行入栈出栈</h4>
+<ul>
+<li>第一次访问对节点做访问记录，不打印节点值而是去压其左孩子节点入栈（毕竟中序遍历，即遍历完左子树再访问该节点的值）</li>
+<li>第二次访问打印该节点的值并抛出栈，以及压其右孩子节点入栈。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nmidroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    res, stack = [], []</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    stack.append((root, <span class="literal">False</span>))</span><br><span class="line">    <span class="keyword">while</span> len(stack) &gt; <span class="number">0</span>:</span><br><span class="line">        node, visited = stack.pop()</span><br><span class="line">        <span class="keyword">if</span> visited:</span><br><span class="line">            res.append(node.val)</span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                stack.append((node.right, <span class="literal">False</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append((node, <span class="literal">True</span>))</span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                stack.append((node.left, <span class="literal">False</span>))</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h4 id="贪婪策略找最深左孩子">贪婪策略找最深左孩子</h4>
+<ul>
+<li>访问每个节点时，先用贪婪找到其最深的左孩子，该过程中找到的所有左孩子依次入栈，然后依次出栈打印。</li>
+<li>打印每个节点时，查看该节点有无右孩子，如果有则入栈。</li>
+<li>贪婪策略和变量nextn共同发挥了log记录状态的作用。贪婪策略的存在，使得不用再根据节点访问状态来决定是是访问左孩子还是打印或者访问右孩子。如果nextn为空，则打印节点；不然继续将孩子压入栈。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nmidroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root: </span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    </span><br><span class="line">    res, stack = [], []   </span><br><span class="line">    nextn = root <span class="comment"># 下一个要入栈的节点</span></span><br><span class="line">    <span class="keyword">while</span> nextn <span class="keyword">or</span> stack:         </span><br><span class="line">        <span class="keyword">while</span> nextn: </span><br><span class="line">            stack.append(nextn)</span><br><span class="line">            nextn = nextn.left </span><br><span class="line">        current = stack.pop() <span class="comment"># 要打印的节点</span></span><br><span class="line">        res.append(current.val) </span><br><span class="line">        nextn = current.right     </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="后根遍历-1">后根遍历</h3>
+<h4 id="状态记录和节点绑定入栈左右孩子一起入栈">状态记录和节点绑定入栈，左右孩子一起入栈</h4>
+<ul>
+<li>后根遍历和先根遍历，都可以<code>左右孩子一起入栈</code>，这能减少程序逻辑的工作量。原因在于，左右孩子之间没有根节点。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">npostroot</span><span class="params">(root)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>: </span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">        </span><br><span class="line">    res, stack = [], [(root, <span class="literal">False</span>)]   </span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        current, visited = stack.pop()</span><br><span class="line">        <span class="keyword">if</span> visited: <span class="comment"># 只有访问状态为True的节点才能被操作</span></span><br><span class="line">            res.append(current.val)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append((current, <span class="literal">True</span>))</span><br><span class="line">            <span class="keyword">if</span> current.right:</span><br><span class="line">                stack.append((current.right, <span class="literal">False</span>))</span><br><span class="line">            <span class="keyword">if</span> current.left:</span><br><span class="line">                stack.append((current.left, <span class="literal">False</span>))               </span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h4 id="右孩子在打印节点之后入栈有右子树会被访问三次">右孩子在打印节点之后入栈，有右子树会被访问三次</h4>
+<p>循环（访问）次数偏多的原因：没有利用<code>左右孩子一起入栈</code>这个特性，反而最大限度地利用log来查询节点状态。</p>
+<ul>
+<li>确定左子树已经访问（打印）完毕之后才将右孩子入栈</li>
+<li>有右孩子的节点会被访问三次，无右孩子的节点会被访问两次
+<ul>
+<li>有右孩子的，第二次访问不打印，而是将右孩子入栈；第三次访问时右子树已被访问并打印，才打印本节点</li>
+<li>无右孩子的，第二次就打印</li>
+</ul></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">npostroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    stack = [root]</span><br><span class="line">    log = []</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> len(stack) &gt; <span class="number">0</span>:</span><br><span class="line">        node = stack[<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> log: <span class="comment"># 第一次访问</span></span><br><span class="line">            log.append(node)</span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                stack.append(node.left)     </span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            <span class="comment"># 第二次访问，没有右孩子或者右子树已被访问的时候，打印节点值</span></span><br><span class="line">            <span class="comment"># 如果有右孩子且右孩子未被访问，则不打印该节点，而是将其右孩子节点入栈</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> node.right: <span class="comment"># 没有右节点，则打印，属于第二次访问本节点</span></span><br><span class="line">                res.append(stack.pop(<span class="number">-1</span>).val)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> node.right <span class="keyword">not</span> <span class="keyword">in</span> log:  </span><br><span class="line">                    <span class="comment"># 右节点未被访问过，也意味着右子树节点都未被拿到过，属于第二次访问，还会有第三次访问</span></span><br><span class="line">                    stack.append(node.right)</span><br><span class="line">                <span class="keyword">else</span>: <span class="comment"># 右子树被访问过，属于第三次访问本节点</span></span><br><span class="line">                    <span class="comment"># 右孩子被访问过，在这里也意味着打印过，也意味着整个右子树打印过</span></span><br><span class="line">                    res.append(stack.pop(<span class="number">-1</span>).val)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h4 id="贪婪策略入栈和出栈两个迭代">贪婪策略，入栈和出栈两个迭代</h4>
+<ul>
+<li>左孩子迭代入栈：访问每个节点时，先用贪婪策略找到其最深的左孩子，该过程中找到的所有左孩子依次入栈，直到没有左孩子。</li>
+<li>迭代出栈：依次出栈，打印，直到节点有右孩子。有右孩子且右子树未被访问，则对右孩子做<code>左孩子迭代入栈</code>操作。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">npostroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    res, stack = [], []</span><br><span class="line">    nextn = root <span class="comment"># 下一个压入栈的节点</span></span><br><span class="line">    <span class="keyword">while</span> nextn <span class="keyword">or</span> len(stack) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">while</span> nextn:</span><br><span class="line">            stack.append((nextn, <span class="literal">False</span>))</span><br><span class="line">            nextn = nextn.left</span><br><span class="line">        <span class="keyword">while</span> len(stack) &gt; <span class="number">0</span>:</span><br><span class="line">            node, visited = stack.pop(<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> visited:</span><br><span class="line">                stack.append((node, <span class="literal">True</span>))</span><br><span class="line">                nextn = node.right</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res.append(node.val)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h4 id="利用打印节点和栈顶节点的关系来推测状态">利用打印节点和栈顶节点的关系来推测状态</h4>
+<p>节点状态、访问次数，其实意味着是从左子树回来还是从右子树回来，那么如果能利用打印节点和栈顶节点的关系来推测状态，就可以不用记录节点状态或者访问次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">npostroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    nextn = root <span class="comment"># 下一个要入栈的节点</span></span><br><span class="line">    res = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> nextn <span class="keyword">or</span> len(stack) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">while</span> nextn:</span><br><span class="line">            stack.append(nextn)</span><br><span class="line">            nextn = nextn.left <span class="keyword">if</span> nextn.left <span class="keyword">else</span> nextn.right </span><br><span class="line">        node = stack.pop() <span class="comment"># 出栈并打印的节点</span></span><br><span class="line">        res.append(node.val)</span><br><span class="line">        <span class="keyword">if</span> len(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> stack[<span class="number">-1</span>].left == node: </span><br><span class="line">            <span class="comment"># 从栈顶二叉树的左子树回来，就直接将右孩子压入栈</span></span><br><span class="line">            nextn = stack[<span class="number">-1</span>].right</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 从栈顶二叉树的右子树回来，就访问栈顶二叉树的根节点</span></span><br><span class="line">            nextn = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h4 id="利用后序的反序列与先序关系">利用后序的反序列与先序关系</h4>
+<p>后序遍历的顺序是<code>左右根</code>，那么其反序是<code>根右左</code>，和先序遍历的<code>根左右</code>的左右顺序相反，那么只要把代码里访问左右节点的顺序互换就好了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">npostroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    res = []</span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    stack.append(root)</span><br><span class="line">    <span class="keyword">while</span> len(stack) &gt; <span class="number">0</span>:</span><br><span class="line">        node = stack.pop(<span class="number">-1</span>)  </span><br><span class="line">        res.append(node.val)</span><br><span class="line">        <span class="keyword">if</span> node.left:</span><br><span class="line">            stack.append(node.left)</span><br><span class="line">        <span class="keyword">if</span> node.right:</span><br><span class="line">            stack.append(node.right)</span><br><span class="line">    <span class="keyword">return</span> res[::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="分层遍历">分层遍历</h2>
+<p>与先根、后根、中根遍历不同，分层遍历里同一层的节点在同一个访问批次，它们的孩子节点在之后的批次被访问。这种区别导致分层遍历可以用队列这种数据结构，而不是栈。</p>
+<p>分层遍历属于广度优先遍历，而先根、中根和后根都是深度优先遍历。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">levelroot</span><span class="params">(root)</span>:</span></span><br><span class="line">    queue = [root]</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> len(queue) &gt; <span class="number">0</span>:</span><br><span class="line">        node = queue.pop(<span class="number">0</span>)</span><br><span class="line">        res.append(node.val)</span><br><span class="line">        <span class="keyword">if</span> node.left:</span><br><span class="line">            queue.append(node.left)</span><br><span class="line">        <span class="keyword">if</span> node.right:</span><br><span class="line">            queue.append(node.right)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<blockquote>
+<p>['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-tags"> 
+           <a href="https://github.com/wolfbrother/wolfbrother.github.io/blob/hexo/source/_posts/algs/general/2019-09-二叉树的遍历：递归、非递归和分层.md" rel="tag" target="_blank">&#64gitRepo</a>
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之一部/" rel="next" title="机器学习概念总结三分之一部">
+                <i class="fa fa-chevron-left"></i> 机器学习概念总结三分之一部
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/12/algs/arrow4Offer/2019-09-12-30-连续子数组的最大和/" rel="prev" title="剑指30-连续子数组的最大和">
+                剑指30-连续子数组的最大和 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="wolfbrother">
+            
+              <p class="site-author-name" itemprop="name">wolfbrother</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wolfbrother/wolfbrother.github.io/issues" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:jlxufly@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归遍历"><span class="nav-number">1.</span> <span class="nav-text">递归遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先根遍历"><span class="nav-number">1.1.</span> <span class="nav-text">先根遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中根遍历"><span class="nav-number">1.2.</span> <span class="nav-text">中根遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后根遍历"><span class="nav-number">1.3.</span> <span class="nav-text">后根遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归遍历"><span class="nav-number">2.</span> <span class="nav-text">非递归遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先根遍历-1"><span class="nav-number">2.1.</span> <span class="nav-text">先根遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中根遍历-1"><span class="nav-number">2.2.</span> <span class="nav-text">中根遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#节点和状态绑定执行入栈出栈"><span class="nav-number">2.2.1.</span> <span class="nav-text">节点和状态绑定执行入栈出栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#贪婪策略找最深左孩子"><span class="nav-number">2.2.2.</span> <span class="nav-text">贪婪策略找最深左孩子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后根遍历-1"><span class="nav-number">2.3.</span> <span class="nav-text">后根遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#状态记录和节点绑定入栈左右孩子一起入栈"><span class="nav-number">2.3.1.</span> <span class="nav-text">状态记录和节点绑定入栈，左右孩子一起入栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#右孩子在打印节点之后入栈有右子树会被访问三次"><span class="nav-number">2.3.2.</span> <span class="nav-text">右孩子在打印节点之后入栈，有右子树会被访问三次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#贪婪策略入栈和出栈两个迭代"><span class="nav-number">2.3.3.</span> <span class="nav-text">贪婪策略，入栈和出栈两个迭代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用打印节点和栈顶节点的关系来推测状态"><span class="nav-number">2.3.4.</span> <span class="nav-text">利用打印节点和栈顶节点的关系来推测状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用后序的反序列与先序关系"><span class="nav-number">2.3.5.</span> <span class="nav-text">利用后序的反序列与先序关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分层遍历"><span class="nav-number">3.</span> <span class="nav-text">分层遍历</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狼哥空间</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'iKewncyt21DH3cd1bESqHH10-gzGzoHsz',
+        appKey: 'EpCP2TXQXUIm4jMMbzLk3r0u',
+        placeholder: '(>﹏<) Just show your thinking~',
+        avatar:'monsterid',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

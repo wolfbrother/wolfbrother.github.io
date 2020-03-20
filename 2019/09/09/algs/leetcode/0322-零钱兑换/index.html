@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="动态规划,递归,">
+  <meta name="keywords" content="递归,动态规划,">
 
 
 
@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="问题 给定不同面额的硬币(coins)和一个总金额(amount) 。写一个函数来计算可以凑成总金额所需的最少的硬币个数，如果没有任何一种硬币组合能满足，返回 -1。 示例1 12输入：coins = [1, 2, 5], amount = 11输出：3 (5+5+1) 示例2 12输入：coins = [2], amount = 3输出：-1 (无法满足)  核心在于应用动态规划思想，有递归和非">
-<meta name="keywords" content="动态规划,递归">
+<meta name="description" content="问题 给定不同面额的硬币(coins)和一个总金额(amount) 。写一个函数来计算可以凑成总金额所需的最少的硬币个数，如果没有任何一种硬币组合能满足，返回 -1。 示例1 12输入：coins = [1, 2, 5], amount = 11输出：3 (5+5+1) 示例2 12输入：coins = [2], amount = 3输出：-1 (无法满足)  核心在于应用动态规划思">
+<meta name="keywords" content="递归,动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="力扣0322-零钱兑换">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/09/algs/leetcode/0322-零钱兑换/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="问题 给定不同面额的硬币(coins)和一个总金额(amount) 。写一个函数来计算可以凑成总金额所需的最少的硬币个数，如果没有任何一种硬币组合能满足，返回 -1。 示例1 12输入：coins = [1, 2, 5], amount = 11输出：3 (5+5+1) 示例2 12输入：coins = [2], amount = 3输出：-1 (无法满足)  核心在于应用动态规划思想，有递归和非">
+<meta property="og:description" content="问题 给定不同面额的硬币(coins)和一个总金额(amount) 。写一个函数来计算可以凑成总金额所需的最少的硬币个数，如果没有任何一种硬币组合能满足，返回 -1。 示例1 12输入：coins = [1, 2, 5], amount = 11输出：3 (5+5+1) 示例2 12输入：coins = [2], amount = 3输出：-1 (无法满足)  核心在于应用动态规划思">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="力扣0322-零钱兑换">
-<meta name="twitter:description" content="问题 给定不同面额的硬币(coins)和一个总金额(amount) 。写一个函数来计算可以凑成总金额所需的最少的硬币个数，如果没有任何一种硬币组合能满足，返回 -1。 示例1 12输入：coins = [1, 2, 5], amount = 11输出：3 (5+5+1) 示例2 12输入：coins = [2], amount = 3输出：-1 (无法满足)  核心在于应用动态规划思想，有递归和非">
+<meta name="twitter:description" content="问题 给定不同面额的硬币(coins)和一个总金额(amount) 。写一个函数来计算可以凑成总金额所需的最少的硬币个数，如果没有任何一种硬币组合能满足，返回 -1。 示例1 12输入：coins = [1, 2, 5], amount = 11输出：3 (5+5+1) 示例2 12输入：coins = [2], amount = 3输出：-1 (无法满足)  核心在于应用动态规划思">
 
 
 
@@ -408,7 +408,7 @@
 <p>想进一步将上述递归该成尾递归，进而去掉尾递归以提高效率，却发现不容易做。通过对比猜测原因：回溯法（如智能体版本的八皇后）实现的递归，比较容易改成尾递归；或者无分叉的递归（如阶乘），也容易修改成尾递归版本。然而零钱兑换既有分叉，又不好用回溯，因此不容易用尾递归实现。</p>
 <hr>
 <p>虽然不容易通过尾递归这条路线摆脱递归，但可以通过从底层到高层构建状态集合来摆脱递归。</p>
-<p>用了动态规划思想，但没用递归而是用循环。<br>令<code>num=states[sum]</code>表示sum金额的最小硬币数是num，作为一个状态。sum较小的状态定义为小状态，sum越大则状态越大。不用递归的话，只能先构建小的状态，在小状态基础上构建大状态，直到构建到题目要求的状态Sum为止。</p>
+<p>用了动态规划思想，但没用递归而是用循环。 令<code>num=states[sum]</code>表示sum金额的最小硬币数是num，作为一个状态。sum较小的状态定义为小状态，sum越大则状态越大。不用递归的话，只能先构建小的状态，在小状态基础上构建大状态，直到构建到题目要求的状态Sum为止。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coins</span><span class="params">(coinL,Sum)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> Sum &lt; min(coinL):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">    states = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> coin <span class="keyword">in</span> coinL:</span><br><span class="line">        states[coin] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> range(<span class="number">1</span>,Sum+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> s <span class="keyword">not</span> <span class="keyword">in</span> states.keys():</span><br><span class="line">            minNum = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">for</span> coin <span class="keyword">in</span> coinL:</span><br><span class="line">                <span class="keyword">if</span> s-coin <span class="keyword">in</span> states.keys():</span><br><span class="line">                    <span class="keyword">if</span> minNum <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                        minNum = states[s-coin]+<span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">if</span> minNum &gt; states[s-coin]+<span class="number">1</span>:</span><br><span class="line">                            minNum = states[s-coin]+<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> minNum <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                states[s] = minNum</span><br><span class="line">    <span class="keyword">if</span> Sum <span class="keyword">in</span> states.keys():</span><br><span class="line">        <span class="keyword">return</span> states[Sum]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
 
       
@@ -427,9 +427,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/动态规划/" rel="tag">#动态规划</a>
-          
             <a href="/tags/递归/" rel="tag">#递归</a>
+          
+            <a href="/tags/动态规划/" rel="tag">#动态规划</a>
           
           <a href="https://github.com/wolfbrother/wolfbrother.github.io/blob/hexo/source/_posts/algs/leetcode/0322-零钱兑换.md" rel="tag" target="_blank">&#64gitRepo</a>
         </div>
@@ -445,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之一部/" rel="next" title="机器学习概念总结三分之一部">
-                <i class="fa fa-chevron-left"></i> 机器学习概念总结三分之一部
+              <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之三部/" rel="next" title="机器学习概念总结三分之三部">
+                <i class="fa fa-chevron-left"></i> 机器学习概念总结三分之三部
               </a>
             
           </div>
@@ -455,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/09/algs/general/2019-09-10-股票的最大利润/" rel="prev" title="股票的最大利润">
-                股票的最大利润 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之一部/" rel="prev" title="机器学习概念总结三分之一部">
+                机器学习概念总结三分之一部 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

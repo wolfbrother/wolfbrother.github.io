@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="题目描述： 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。  根据二维数组特性，如果数字target在第m行，则必有array[m][0]&amp;lt;=target 且array[m][N-1]&amp;gt;=target，即大于等于行首元素，小于等于行尾元素。因">
+<meta name="description" content="题目描述： 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。  根据二维数组特性，如果数字target在第m行，则必有array[m][0]&amp;lt;=target 且array[m][N-1]&amp;gt;=target，即大于等于行首元素，小于等于行尾元">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指01-二维数组中的查找">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/12/algs/arrow4Offer/2019-09-12-01-二维数组中的查找/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="题目描述： 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。  根据二维数组特性，如果数字target在第m行，则必有array[m][0]&amp;lt;=target 且array[m][N-1]&amp;gt;=target，即大于等于行首元素，小于等于行尾元素。因">
+<meta property="og:description" content="题目描述： 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。  根据二维数组特性，如果数字target在第m行，则必有array[m][0]&amp;lt;=target 且array[m][N-1]&amp;gt;=target，即大于等于行首元素，小于等于行尾元">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指01-二维数组中的查找">
-<meta name="twitter:description" content="题目描述： 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。  根据二维数组特性，如果数字target在第m行，则必有array[m][0]&amp;lt;=target 且array[m][N-1]&amp;gt;=target，即大于等于行首元素，小于等于行尾元素。因">
+<meta name="twitter:description" content="题目描述： 在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。  根据二维数组特性，如果数字target在第m行，则必有array[m][0]&amp;lt;=target 且array[m][N-1]&amp;gt;=target，即大于等于行首元素，小于等于行尾元">
 
 
 
@@ -397,7 +397,7 @@
         <p>题目描述：</p>
 <p>在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
 <hr>
-<p>根据二维数组特性，如果数字target在第m行，则必有<code>array[m][0]&lt;=target</code> 且<code>array[m][N-1]&gt;=target</code>，即大于等于行首元素，小于等于行尾元素。<br>因此，从第一行<code>m=0</code>到最后一行<code>m=M-1</code>的每行，依次做如下两步检测：</p>
+<p>根据二维数组特性，如果数字target在第m行，则必有<code>array[m][0]&lt;=target</code> 且<code>array[m][N-1]&gt;=target</code>，即大于等于行首元素，小于等于行尾元素。 因此，从第一行<code>m=0</code>到最后一行<code>m=M-1</code>的每行，依次做如下两步检测：</p>
 <ul>
 <li>如果<code>array[m][N-1] &lt; target</code>则该行肯定不存在该数，直接进入下一行；</li>
 <li>如果<code>array[m][0] &gt; target</code>则整个数组内将不存在该数，返回False。</li>
@@ -408,10 +408,10 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Find</span><span class="params">(self, target, array)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(num, array)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> len(array) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            s, t = <span class="number">0</span>, len(array)<span class="number">-1</span></span><br><span class="line">            <span class="keyword">while</span> s &lt; t:</span><br><span class="line">                mid = (s+t)&gt;&gt;<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> array[mid] == num:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">                <span class="keyword">elif</span> array[mid] &gt; num:</span><br><span class="line">                    t = mid</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    s = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> array[s] == num</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> array <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> len(array) == <span class="number">0</span> <span class="keyword">or</span> len(array[<span class="number">0</span>]) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        M, N = len(array),len(array[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> range(M):</span><br><span class="line">            <span class="keyword">if</span> array[m][N<span class="number">-1</span>] &lt; target:</span><br><span class="line">                <span class="comment"># 该行肯定不存在该数，直接进入下一行</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">elif</span> array[m][<span class="number">0</span>] &gt; target:</span><br><span class="line">                <span class="comment"># 整个数组内将不存在该数</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> search(target, array[m]): </span><br><span class="line">                    <span class="comment"># 如果不在这一行，还要继续进入下一行继续检测</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 <hr>
-<p>将二维数组array看成是平面上$M\times N$个小格子组成的一个矩形，则比较某元素array[m][n]与搜索目标target的关系，对搜索空间有如下影响：</p>
+<p>将二维数组array看成是平面上<span class="math inline">\(M\times N\)</span>个小格子组成的一个矩形，则比较某元素array[m][n]与搜索目标target的关系，对搜索空间有如下影响：</p>
 <ul>
-<li>如果<code>array[m][n] &lt; target</code>，则任何横坐标$m’\le m$ 或者纵坐标$n’\le n$的小格子都不再考虑,即包括array[m][n]的左上角所有格子组成的小矩形。</li>
-<li>如果<code>array[m][n] &gt; target</code>，则任何横坐标$m’\ge m$ 或者纵坐标$n’\ge n$的小格子都不再考虑，即包括array[m][n]的右下角所有格子组成的小矩形。</li>
+<li>如果<code>array[m][n] &lt; target</code>，则任何横坐标<span class="math inline">\(m&#39;\le m\)</span> 或者纵坐标<span class="math inline">\(n&#39;\le n\)</span>的小格子都不再考虑,即包括array[m][n]的左上角所有格子组成的小矩形。</li>
+<li>如果<code>array[m][n] &gt; target</code>，则任何横坐标<span class="math inline">\(m&#39;\ge m\)</span> 或者纵坐标<span class="math inline">\(n&#39;\ge n\)</span>的小格子都不再考虑，即包括array[m][n]的右下角所有格子组成的小矩形。</li>
 <li>如果<code>array[m][n] == target</code>，查找结束。</li>
 </ul>
 <p>也就是说，如果<code>array[m][n]</code>没有命中，则搜索空间将被抠掉一个以<code>array[m][n]</code>为右下角或者左上角的小矩形。那么，如果每次选择的<code>array[m][n]</code>位于当前矩形空间的左小角或者右上角，那么结果是要么命中，要么搜索空间被抠掉其所在的行或者列，仍然留下了一个矩形的待搜索空间。那么，就可以用迭代来继续按照上述方法做，直到找到或者待搜索空间为空。</p>
@@ -446,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/12/algs/arrow4Offer/2019-09-12-03-从尾到头打印链表/" rel="next" title="剑指03-从尾到头打印链表">
-                <i class="fa fa-chevron-left"></i> 剑指03-从尾到头打印链表
+              <a href="/2019/09/12/algs/arrow4Offer/2019-09-12-02-替换空格/" rel="next" title="剑指02-替换空格">
+                <i class="fa fa-chevron-left"></i> 剑指02-替换空格
               </a>
             
           </div>

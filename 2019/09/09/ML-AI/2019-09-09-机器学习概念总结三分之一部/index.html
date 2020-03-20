@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="求$m\times k$的矩阵$A$和$n\times k$矩阵$B$的欧几里得距离。说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个$m\times n$维矩阵D，其中$D_{ij}$表示$A_i$和$D_j$的欧几里得距离。 分析：$D^2_{ij} = \mid\mid A_i-B_j\mid\mid ^">
+<meta name="description" content="求\(m\times k\)的矩阵\(A\)和\(n\times k\)矩阵\(B\)的欧几里得距离。 说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个\(m\times n\)维矩阵D， 其中\(D_{ij}\)表示\(A_i\)和\(D_j\)的欧几里得距离。 分析：\(D^2_{ij} = \mid\">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习概念总结三分之一部">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之一部/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="求$m\times k$的矩阵$A$和$n\times k$矩阵$B$的欧几里得距离。说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个$m\times n$维矩阵D，其中$D_{ij}$表示$A_i$和$D_j$的欧几里得距离。 分析：$D^2_{ij} = \mid\mid A_i-B_j\mid\mid ^">
+<meta property="og:description" content="求\(m\times k\)的矩阵\(A\)和\(n\times k\)矩阵\(B\)的欧几里得距离。 说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个\(m\times n\)维矩阵D， 其中\(D_{ij}\)表示\(A_i\)和\(D_j\)的欧几里得距离。 分析：\(D^2_{ij} = \mid\">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习概念总结三分之一部">
-<meta name="twitter:description" content="求$m\times k$的矩阵$A$和$n\times k$矩阵$B$的欧几里得距离。说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个$m\times n$维矩阵D，其中$D_{ij}$表示$A_i$和$D_j$的欧几里得距离。 分析：$D^2_{ij} = \mid\mid A_i-B_j\mid\mid ^">
+<meta name="twitter:description" content="求\(m\times k\)的矩阵\(A\)和\(n\times k\)矩阵\(B\)的欧几里得距离。 说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个\(m\times n\)维矩阵D， 其中\(D_{ij}\)表示\(A_i\)和\(D_j\)的欧几里得距离。 分析：\(D^2_{ij} = \mid\">
 
 
 
@@ -395,48 +395,51 @@
       
 
       
-        <h2 id="求-m-times-k-的矩阵-A-和-n-times-k-矩阵-B-的欧几里得距离。"><a href="#求-m-times-k-的矩阵-A-和-n-times-k-矩阵-B-的欧几里得距离。" class="headerlink" title="求$m\times k$的矩阵$A$和$n\times k$矩阵$B$的欧几里得距离。"></a>求$m\times k$的矩阵$A$和$n\times k$矩阵$B$的欧几里得距离。</h2><p>说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个$m\times n$维矩阵D，<br>其中$D_{ij}$表示$A_i$和$D_j$的欧几里得距离。</p>
-<p>分析：$D^2_{ij} = \mid\mid A_i-B_j\mid\mid ^2 = A^2_i-2A_iB^T_j+B^2_i= A_iA^T_i-2A_iB^T_j+B_jB^T_j$，其中有$i&lt;m, j&lt;n$。</p>
-<p>对于A，首先计算m个横向量的模的平方，得到m维列向量，然后复制n份，得到$m\times n$的矩阵；</p>
-<p>对于B，计算n个横向量的模的平放，得到n维列两向量，然后复制m份，得到的矩阵进行转置，得到$m\times n$的矩阵；</p>
-<p>对于$A\times B^T$，直接带入计算即可。</p>
+        <h2 id="求mtimes-k的矩阵a和ntimes-k矩阵b的欧几里得距离">求<span class="math inline">\(m\times k\)</span>的矩阵<span class="math inline">\(A\)</span>和<span class="math inline">\(n\times k\)</span>矩阵<span class="math inline">\(B\)</span>的欧几里得距离。</h2>
+<p>说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个<span class="math inline">\(m\times n\)</span>维矩阵D， 其中<span class="math inline">\(D_{ij}\)</span>表示<span class="math inline">\(A_i\)</span>和<span class="math inline">\(D_j\)</span>的欧几里得距离。</p>
+<p>分析：<span class="math inline">\(D^2_{ij} = \mid\mid A_i-B_j\mid\mid ^2 = A^2_i-2A_iB^T_j+B^2_i= A_iA^T_i-2A_iB^T_j+B_jB^T_j\)</span>，其中有<span class="math inline">\(i&lt;m, j&lt;n\)</span>。</p>
+<p>对于A，首先计算m个横向量的模的平方，得到m维列向量，然后复制n份，得到<span class="math inline">\(m\times n\)</span>的矩阵；</p>
+<p>对于B，计算n个横向量的模的平放，得到n维列两向量，然后复制m份，得到的矩阵进行转置，得到<span class="math inline">\(m\times n\)</span>的矩阵；</p>
+<p>对于<span class="math inline">\(A\times B^T\)</span>，直接带入计算即可。</p>
 <p>将三个矩阵带入计算就行。</p>
-<h2 id="梯度与方向导数"><a href="#梯度与方向导数" class="headerlink" title="梯度与方向导数"></a>梯度与方向导数</h2><p>一元函数的导数:$f’(x) = \lim_{\Delta x\rightarrow 0}\frac{f(x+\Delta x)-f(x)}{\Delta x}$</p>
-<p>多元函数有偏导数，对f(x,y)，有$f<em>x(x,y) = \lim</em>{\Delta x}\frac{f(x+ \Delta x,y)-f(x,y)}{\Delta x}$，表示y不变时，沿x轴的变化率。同理可定义$f_y(x,y)$。</p>
-<p>方向导数：多元函数是一个平面，方向有很多， 而$f_x(x,y)$的x 轴和$f_y(x,y)$的y 轴只是其中两个方向的变化率而已。方向导数可以表示任意方向变化率。<br>对于方向$u=cos\theta i + sin \theta j$，有</p>
-<script type="math/tex; mode=display">\lim_{\Delta t}\frac{f(x+ cos\theta\Delta t, y+ sin\theta\Delta t)-f(x,y)}{\Delta t} = f_x(x,y)cos\theta + f_y(x,y)sin\theta</script><p>可以看出，增量是向量$(f_x,f_y)$与方向$u$的单位向量的向量积。想要增量最大，则只能让方向与向量$(f_x,f_y)$保持一致，而后者又叫做梯度。</p>
-<h4 id="批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD"><a href="#批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD" class="headerlink" title="批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD"></a>批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD</h4><ul>
+<h2 id="梯度与方向导数">梯度与方向导数</h2>
+<p>一元函数的导数:<span class="math inline">\(f&#39;(x) = \lim_{\Delta x\rightarrow 0}\frac{f(x+\Delta x)-f(x)}{\Delta x}\)</span></p>
+<p>多元函数有偏导数，对f(x,y)，有<span class="math inline">\(f_x(x,y) = \lim_{\Delta x}\frac{f(x+ \Delta x,y)-f(x,y)}{\Delta x}\)</span>，表示y不变时，沿x轴的变化率。同理可定义<span class="math inline">\(f_y(x,y)\)</span>。</p>
+<p>方向导数：多元函数是一个平面，方向有很多， 而<span class="math inline">\(f_x(x,y)\)</span>的x 轴和<span class="math inline">\(f_y(x,y)\)</span>的y 轴只是其中两个方向的变化率而已。方向导数可以表示任意方向变化率。 对于方向<span class="math inline">\(u=cos\theta i + sin \theta j\)</span>，有 <span class="math display">\[\lim_{\Delta t}\frac{f(x+ cos\theta\Delta t, y+ sin\theta\Delta t)-f(x,y)}{\Delta t} = f_x(x,y)cos\theta + f_y(x,y)sin\theta\]</span> 可以看出，增量是向量<span class="math inline">\((f_x,f_y)\)</span>与方向<span class="math inline">\(u\)</span>的单位向量的向量积。想要增量最大，则只能让方向与向量<span class="math inline">\((f_x,f_y)\)</span>保持一致，而后者又叫做梯度。</p>
+<h4 id="批量梯度下降bgd随机梯度下降sgd小批量梯度下降mbgd">批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD</h4>
+<ul>
 <li>BGD：每次在更新参数时使用所有的样本；</li>
 <li>SGD：每次更新参数时采用随机抽样的单个样本；</li>
 <li>MBGD:BGD和SGD这两种极端方案的折中。</li>
 </ul>
-<h4 id="SGD-Momentum-Adagard-Adam"><a href="#SGD-Momentum-Adagard-Adam" class="headerlink" title="SGD,Momentum,Adagard,Adam"></a>SGD,Momentum,Adagard,Adam</h4><ul>
-<li>总结<ul>
+<h4 id="sgdmomentumadagardadam">SGD,Momentum,Adagard,Adam</h4>
+<ul>
+<li>总结
+<ul>
 <li>一阶动量（梯度）衰减方案利于全局搜索，</li>
 <li>二阶动量（梯度的平方）衰减方案使得学习率自动调整，之所以要衰减是为了防止梯度消失</li>
 <li>求梯度时用到前瞻性预估</li>
-</ul>
-</li>
+</ul></li>
 <li>牛客网上的总结： <a href="https://www.nowcoder.com/tutorial/95/a785d36cf4264dfa93c3de133d0bb339" target="_blank" rel="noopener">链接</a></li>
 <li>对这几个优化方法的介绍比较全面： <a href="https://fengxc.me/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95.html" target="_blank" rel="noopener">链接</a></li>
 <li>各个优化方法的优缺点总结的比较好：<a href="https://www.cnblogs.com/GeekDanny/p/9655597.html" target="_blank" rel="noopener">链接</a></li>
 <li>这个写得更完善： <a href="https://www.jianshu.com/p/aebcaf8af76e" target="_blank" rel="noopener">链接</a></li>
-<li>最生动的解释，讲了各个方法的关系： <a href="https://www.bilibili.com/video/av16001891/?p=18" target="_blank" rel="noopener">链接</a><ul>
+<li>最生动的解释，讲了各个方法的关系： <a href="https://www.bilibili.com/video/av16001891/?p=18" target="_blank" rel="noopener">链接</a>
+<ul>
 <li>Momentum和AdaGrad的组合</li>
-</ul>
-</li>
+</ul></li>
 <li>这儿总结的也不错 从 SGD 到 Adam —— 6大常见优化算法总结 - zhahzhi的文章 - 知乎<a href="https://zhuanlan.zhihu.com/p/64113429" target="_blank" rel="noopener">链接</a></li>
 </ul>
-<h2 id="海森矩阵与牛顿法"><a href="#海森矩阵与牛顿法" class="headerlink" title="海森矩阵与牛顿法"></a>海森矩阵与牛顿法</h2><p>二阶可微函数$f(x)$在$x_0$处的二阶展开式</p>
-<script type="math/tex; mode=display">f(x) = f(x_0)+g_0^T(x-x_0)+\frac1{2}(x-x_0)^TH_0(x-x_0)+o^n</script><p>其中$x,x<em>0$都是向量, $g_0$是$x_0$处的梯度向量，$H_0$是$x</em>)$处的海森矩阵。</p>
+<h2 id="海森矩阵与牛顿法">海森矩阵与牛顿法</h2>
+<p>二阶可微函数<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(x_0\)</span>处的二阶展开式 <span class="math display">\[f(x) = f(x_0)+g_0^T(x-x_0)+\frac1{2}(x-x_0)^TH_0(x-x_0)+o^n\]</span> 其中<span class="math inline">\(x,x_0\)</span>都是向量, <span class="math inline">\(g_0\)</span>是<span class="math inline">\(x_0\)</span>处的梯度向量，<span class="math inline">\(H_0\)</span>是<span class="math inline">\(x_)\)</span>处的海森矩阵。</p>
 <ul>
-<li>当$x_0$处梯度$g_0=0$且海森矩阵$H_0$是正定矩阵时，$x_0$为极小值。</li>
+<li>当<span class="math inline">\(x_0\)</span>处梯度<span class="math inline">\(g_0=0\)</span>且海森矩阵<span class="math inline">\(H_0\)</span>是正定矩阵时，<span class="math inline">\(x_0\)</span>为极小值。</li>
 </ul>
-<p>证明：正定矩阵$H_0$必满足对任意非零向量$x$有$x^TH_0x&gt;0$。那么对于$\triangle x$有$f(x_0+\triangle x)&gt;f(x_0)$。</p>
+<p>证明：正定矩阵<span class="math inline">\(H_0\)</span>必满足对任意非零向量<span class="math inline">\(x\)</span>有<span class="math inline">\(x^TH_0x&gt;0\)</span>。那么对于<span class="math inline">\(\triangle x\)</span>有<span class="math inline">\(f(x_0+\triangle x)&gt;f(x_0)\)</span>。</p>
 <ul>
 <li>牛顿法的迭代公式</li>
 </ul>
-<p>说明：由极小值的必要条件，对$f(x)$进行求导并且令倒数为0，有$g_0+H_0(x-x_0)=0$。<br>得到$x = x_0-\frac{g_0}{H_0}$，将其作为迭代公式。</p>
+<p>说明：由极小值的必要条件，对<span class="math inline">\(f(x)\)</span>进行求导并且令倒数为0，有<span class="math inline">\(g_0+H_0(x-x_0)=0\)</span>。 得到<span class="math inline">\(x = x_0-\frac{g_0}{H_0}\)</span>，将其作为迭代公式。</p>
 <ul>
 <li>牛顿法的缺点</li>
 </ul>
@@ -448,20 +451,21 @@
 <li>梯度下降法、牛顿法和拟牛顿法 <a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">链接</a></li>
 <li>最优化问题中，牛顿法为什么比梯度下降法求解需要的迭代次数更少？ <a href="https://www.zhihu.com/question/19723347/answer/14636244" target="_blank" rel="noopener">链接</a></li>
 </ul>
-<h2 id="线性回归和局部加权线性回归"><a href="#线性回归和局部加权线性回归" class="headerlink" title="线性回归和局部加权线性回归"></a>线性回归和局部加权线性回归</h2><ul>
+<h2 id="线性回归和局部加权线性回归">线性回归和局部加权线性回归</h2>
+<ul>
 <li>二者的基本公式可参考我的博客“LR vs LWLR”：<a href="https://wolfbrother.blog.csdn.net/article/details/46778039" target="_blank" rel="noopener">链接</a>，注意那张插图所说明的LWLR的应用场景的例子。</li>
 <li>贝叶斯框架推到线性回归公式，关于先验、后验、似然函数、贝叶斯公式：<a href="https://zhuanlan.zhihu.com/p/44809220" target="_blank" rel="noopener">链接</a></li>
-<li>线性回归是局部加权线性回归的特殊形式，具体的加权矩阵是单位矩阵，某个样本的损失函数就是其本身的损失函数值。而局部加权线性回归里，一个样本的损失函数，是与其它所有的样本（包括其自身）的损失函数值的乘积的加权和。当计算一个新的样本值的输出值$y$时，首先计算其损失函数（是一个关于$y$的二次函数），然后求解$y$。</li>
+<li>线性回归是局部加权线性回归的特殊形式，具体的加权矩阵是单位矩阵，某个样本的损失函数就是其本身的损失函数值。而局部加权线性回归里，一个样本的损失函数，是与其它所有的样本（包括其自身）的损失函数值的乘积的加权和。当计算一个新的样本值的输出值<span class="math inline">\(y\)</span>时，首先计算其损失函数（是一个关于<span class="math inline">\(y\)</span>的二次函数），然后求解<span class="math inline">\(y\)</span>。</li>
 </ul>
-<h2 id="L2和L1正则化"><a href="#L2和L1正则化" class="headerlink" title="L2和L1正则化"></a>L2和L1正则化</h2><ul>
+<h2 id="l2和l1正则化">L2和L1正则化</h2>
+<ul>
 <li>参考：<a href="https://blog.csdn.net/golden1314521/article/details/46778369" target="_blank" rel="noopener">链接</a></li>
 <li>L2正则化又叫岭回归，有解析解。岭回归是一种专用于共线性数据分析的有偏估计回归方法，实质上是一种改良的最小二乘估计法，通过放弃最小二乘法的无偏性，以损失部分信息、降低精度为代价获得回归系数更为符合实际、更可靠的回归方法，对病态数据的拟合要强于普通最小二乘法。那么什么样得数据算是病态数据，主要有两种，一种是数据点少于变量数（特征维数），这种情况下特征信息矩阵维数无法求逆，不满足最小二乘得条件；第二种是自变量中的某几个存在多重共线性，对于这样得数据虽然可得到无偏解，但是却有可能和实际情况相差甚远（<a href="https://lidongxuan.github.io/blog/regression" target="_blank" rel="noopener">链接</a> 和 <a href="https://www.zhihu.com/question/28221429/answer/53858036" target="_blank" rel="noopener">链接</a> ）。</li>
-<li><p>L1正则化的lasso算法思想：每次迭代中，依次对权值向量的每个值，增大或者减小一个小量（就像梯度下降算法里对自变量的改变一样）同时权值向量的其他值保持不变，计算函数值；对每次迭代里，函数值最优的那个改变（包括权值的位置，该变量的方向）作为本次迭代的改进（参见牛客网的 <a href="https://www.nowcoder.com/tutorial/95/a785d36cf4264dfa93c3de133d0bb339" target="_blank" rel="noopener">链接</a> 所提到的坐标轴下降法）。</p>
-</li>
-<li><p><a href="https://www.zhihu.com/question/23536142/answer/90135994" target="_blank" rel="noopener">LR正则化与数据先验分布的关系？</a> 从贝叶斯的角度来看, 正则化等价于对模型参数引入先验分布, L2相当于参数向量的高斯先验分布，L1X相当于参数向量的拉普拉斯先验分布。</p>
-</li>
+<li><p>L1正则化的lasso算法思想：每次迭代中，依次对权值向量的每个值，增大或者减小一个小量（就像梯度下降算法里对自变量的改变一样）同时权值向量的其他值保持不变，计算函数值；对每次迭代里，函数值最优的那个改变（包括权值的位置，该变量的方向）作为本次迭代的改进（参见牛客网的 <a href="https://www.nowcoder.com/tutorial/95/a785d36cf4264dfa93c3de133d0bb339" target="_blank" rel="noopener">链接</a> 所提到的坐标轴下降法）。</p></li>
+<li><p><a href="https://www.zhihu.com/question/23536142/answer/90135994" target="_blank" rel="noopener">LR正则化与数据先验分布的关系？</a> 从贝叶斯的角度来看, 正则化等价于对模型参数引入先验分布, L2相当于参数向量的高斯先验分布，L1X相当于参数向量的拉普拉斯先验分布。</p></li>
 </ul>
-<h4 id="二者特点"><a href="#二者特点" class="headerlink" title="二者特点"></a>二者特点</h4><ul>
+<h4 id="二者特点">二者特点</h4>
+<ul>
 <li>都能让参数向量值变小 （<a href="https://www.cnblogs.com/alexanderkun/p/6922428.html" target="_blank" rel="noopener">正则化为什么能防止过拟合</a>）。</li>
 <li>L2 并不具有产生稀疏解的能力，也就是说参数并不会真出现很多零。假设我们的预测结果与两个特征相关，L2正则倾向于综合两者的影响，给影响大的特征赋予高的权重；</li>
 <li>而 L1 正则倾向于选择影响较大的参数，而舍弃掉影响较小的那个；</li>
@@ -500,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/09/ML-AI/2019-09-09-统计学习方法的总结/" rel="next" title="统计学习方法的总结">
-                <i class="fa fa-chevron-left"></i> 统计学习方法的总结
+              <a href="/2019/09/09/algs/leetcode/0322-零钱兑换/" rel="next" title="力扣0322-零钱兑换">
+                <i class="fa fa-chevron-left"></i> 力扣0322-零钱兑换
               </a>
             
           </div>
@@ -510,8 +514,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/09/algs/leetcode/0322-零钱兑换/" rel="prev" title="力扣0322-零钱兑换">
-                力扣0322-零钱兑换 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/09/algs/leetcode/0052-N皇后 II/" rel="prev" title="力扣0052-N皇后 II">
+                力扣0052-N皇后 II <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -672,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#求-m-times-k-的矩阵-A-和-n-times-k-矩阵-B-的欧几里得距离。"><span class="nav-number">1.</span> <span class="nav-text">求$m\times k$的矩阵$A$和$n\times k$矩阵$B$的欧几里得距离。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度与方向导数"><span class="nav-number">2.</span> <span class="nav-text">梯度与方向导数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD"><span class="nav-number">2.0.1.</span> <span class="nav-text">批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD-Momentum-Adagard-Adam"><span class="nav-number">2.0.2.</span> <span class="nav-text">SGD,Momentum,Adagard,Adam</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#海森矩阵与牛顿法"><span class="nav-number">3.</span> <span class="nav-text">海森矩阵与牛顿法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归和局部加权线性回归"><span class="nav-number">4.</span> <span class="nav-text">线性回归和局部加权线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L2和L1正则化"><span class="nav-number">5.</span> <span class="nav-text">L2和L1正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二者特点"><span class="nav-number">5.0.1.</span> <span class="nav-text">二者特点</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#求mtimes-k的矩阵a和ntimes-k矩阵b的欧几里得距离"><span class="nav-number">1.</span> <span class="nav-text">求\(m\times k\)的矩阵\(A\)和\(n\times k\)矩阵\(B\)的欧几里得距离。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度与方向导数"><span class="nav-number">2.</span> <span class="nav-text">梯度与方向导数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#批量梯度下降bgd随机梯度下降sgd小批量梯度下降mbgd"><span class="nav-number">2.0.1.</span> <span class="nav-text">批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sgdmomentumadagardadam"><span class="nav-number">2.0.2.</span> <span class="nav-text">SGD,Momentum,Adagard,Adam</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#海森矩阵与牛顿法"><span class="nav-number">3.</span> <span class="nav-text">海森矩阵与牛顿法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归和局部加权线性回归"><span class="nav-number">4.</span> <span class="nav-text">线性回归和局部加权线性回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l2和l1正则化"><span class="nav-number">5.</span> <span class="nav-text">L2和L1正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二者特点"><span class="nav-number">5.0.1.</span> <span class="nav-text">二者特点</span></a></li></ol></li></div>
             
 
           </div>

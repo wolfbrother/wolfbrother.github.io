@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="题目描述 请实现一个函数用来匹配包括.和*的正则表达式。模式中的字符.表示任意一个字符，而*表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串aaa与模式a.a和ab*ac*a匹配，但是与aa.a和ab*a均不匹配  关于模式匹配：  一条包括.和*的正则表达式，即模式，可以用非确定有限状态机来阐述。可知比较麻烦的是处理*。 ba*ab.的状">
+<meta name="description" content="题目描述 请实现一个函数用来匹配包括.和*的正则表达式。模式中的字符.表示任意一个字符，而*表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串aaa与模式a.a和ab*ac*a匹配，但是与aa.a和ab*a均不匹配  关于模式匹配：  一条包括.和*的正则表达式，即模式，可以用非确定有限状态机来阐述。可知比较麻烦的是处理*。">
 <meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指52-正则表达式匹配">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/13/algs/arrow4Offer/2019-09-13-52-正则表达式匹配/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="题目描述 请实现一个函数用来匹配包括.和*的正则表达式。模式中的字符.表示任意一个字符，而*表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串aaa与模式a.a和ab*ac*a匹配，但是与aa.a和ab*a均不匹配  关于模式匹配：  一条包括.和*的正则表达式，即模式，可以用非确定有限状态机来阐述。可知比较麻烦的是处理*。 ba*ab.的状">
+<meta property="og:description" content="题目描述 请实现一个函数用来匹配包括.和*的正则表达式。模式中的字符.表示任意一个字符，而*表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串aaa与模式a.a和ab*ac*a匹配，但是与aa.a和ab*a均不匹配  关于模式匹配：  一条包括.和*的正则表达式，即模式，可以用非确定有限状态机来阐述。可知比较麻烦的是处理*。">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指52-正则表达式匹配">
-<meta name="twitter:description" content="题目描述 请实现一个函数用来匹配包括.和*的正则表达式。模式中的字符.表示任意一个字符，而*表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串aaa与模式a.a和ab*ac*a匹配，但是与aa.a和ab*a均不匹配  关于模式匹配：  一条包括.和*的正则表达式，即模式，可以用非确定有限状态机来阐述。可知比较麻烦的是处理*。 ba*ab.的状">
+<meta name="twitter:description" content="题目描述 请实现一个函数用来匹配包括.和*的正则表达式。模式中的字符.表示任意一个字符，而*表示它前面的字符可以出现任意次（包含0次）。 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串aaa与模式a.a和ab*ac*a匹配，但是与aa.a和ab*a均不匹配  关于模式匹配：  一条包括.和*的正则表达式，即模式，可以用非确定有限状态机来阐述。可知比较麻烦的是处理*。">
 
 
 
@@ -400,10 +400,10 @@
 <hr>
 <p>关于模式匹配：</p>
 <ul>
-<li>一条包括<code>.</code>和<code>*</code>的正则表达式，即模式，可以用<code>非确定有限状态机</code>来阐述。可知比较麻烦的是处理<code>*</code>。<ul>
+<li>一条包括<code>.</code>和<code>*</code>的正则表达式，即模式，可以用<code>非确定有限状态机</code>来阐述。可知比较麻烦的是处理<code>*</code>。
+<ul>
 <li><code>ba*ab.</code>的状态机来举例，状态s1是初始状态，收到b进入s2，s2收到a有两个选择，可能回到s2，也可能进入新状态s3，s3收到b进入s4，s4收到任意一个字符进入s5。</li>
-</ul>
-</li>
+</ul></li>
 <li>用递归。</li>
 </ul>
 <p>关于如下代码：</p>
@@ -413,17 +413,17 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">                         p为空</span><br><span class="line">                        /</span><br><span class="line">                       /</span><br><span class="line">           无 ---- p[0]有无`.`  --- 有`.`其后无`*`</span><br><span class="line">          /            \</span><br><span class="line">         /              \</span><br><span class="line">p[2]是否有`*`            无`.`           无</span><br><span class="line">         \                             /</span><br><span class="line">          \                           /</span><br><span class="line">           有 ---- s[0]是否为对应元素</span><br><span class="line">                                      \</span><br><span class="line">                                       \</span><br><span class="line">                                         有</span><br></pre></td></tr></table></figure>
 <ul>
 <li>处理部分只主动返回True，为确保返回的是True而非False，在返回之前有确认逻辑。坚持不返回False，因为不知为不知，以确保四分支处理线互不干扰。最后一行有个返回False，可以认为是被动返回。</li>
-<li>返回True的确认逻辑的match函数，其输入参数s和p的变更要有依据。如<code>无.和*的参与</code>部分里参数变更为<code>s[1:], p[1:]</code>，是因为有<code>s[0] == p[0]</code>；而<code>第二个字符是*</code>部分里参数变更为<code>s, p[2:]</code>，是因为有<code>p[1] == &#39;*&#39;</code>。</li>
+<li>返回True的确认逻辑的match函数，其输入参数s和p的变更要有依据。如<code>无.和*的参与</code>部分里参数变更为<code>s[1:], p[1:]</code>，是因为有<code>s[0] == p[0]</code>；而<code>第二个字符是*</code>部分里参数变更为<code>s, p[2:]</code>，是因为有<code>p[1] == '*'</code>。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">match</span><span class="params">(self, s, p)</span>:</span></span><br><span class="line">        <span class="comment"># s为空</span></span><br><span class="line">        <span class="keyword">if</span> len(s) == <span class="number">0</span> <span class="keyword">and</span> len(p) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="comment"># 无.和*的参与，且s和p的第一个字符匹配</span></span><br><span class="line">        <span class="keyword">if</span> len(s) &gt; <span class="number">0</span> <span class="keyword">and</span> len(p) &gt; <span class="number">0</span> <span class="keyword">and</span> s[<span class="number">0</span>] == p[<span class="number">0</span>] <span class="keyword">and</span> p[<span class="number">0</span>] <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">'.*'</span>:</span><br><span class="line">            <span class="keyword">if</span> len(p) &gt;=<span class="number">2</span> <span class="keyword">and</span> p[<span class="number">1</span>] != <span class="string">'*'</span> <span class="keyword">or</span> len(p) == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">if</span> self.match(s[<span class="number">1</span>:], p[<span class="number">1</span>:]):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="comment"># 第一个字符是`.`，后面没有`*`</span></span><br><span class="line">        <span class="keyword">if</span> len(p) &gt; <span class="number">0</span> <span class="keyword">and</span> p[<span class="number">0</span>] == <span class="string">'.'</span> <span class="keyword">and</span> (len(p) == <span class="number">1</span> <span class="keyword">or</span> len(p) &gt;= <span class="number">2</span> <span class="keyword">and</span>  p[<span class="number">1</span>] != <span class="string">'*'</span> ) <span class="keyword">and</span> len(s) &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> self.match(s[<span class="number">1</span>:], p[<span class="number">1</span>:]):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二个字符是`*`</span></span><br><span class="line">        <span class="keyword">if</span> len(p) &gt;= <span class="number">2</span> <span class="keyword">and</span> p[<span class="number">1</span>] == <span class="string">'*'</span>:</span><br><span class="line">            <span class="keyword">if</span> self.match(s, p[<span class="number">2</span>:]):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> len(s) &gt; <span class="number">0</span> <span class="keyword">and</span> (s[<span class="number">0</span>] == p[<span class="number">0</span>] <span class="keyword">or</span> p[<span class="number">0</span>] == <span class="string">'.'</span>):</span><br><span class="line">                <span class="keyword">if</span> self.match(s[<span class="number">1</span>:], p) <span class="keyword">or</span> self.match(s[<span class="number">1</span>:], p[<span class="number">2</span>:]):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>动态规划。</li>
 </ul>
-<p>长度为x的字符串$s_1s_2\cdots s_x$，模式长度为y的模式序列$p_1\cdots p_y$。如字符串<code>aaa</code>的长度是3，而模式序列<code>ab*ac*a</code>有5个子模式<code>a,b*,a,c*,a</code>。令g(x,y)表示$s_1s_2\cdots s_x$与$p_1\cdots p_y$的匹配状态，如g(x,y)=0表示匹配不成功，g(x,y)=1表示匹配成功。<br>则g(x,y)有如下递推关系：</p>
+<p>长度为x的字符串<span class="math inline">\(s_1s_2\cdots s_x\)</span>，模式长度为y的模式序列<span class="math inline">\(p_1\cdots p_y\)</span>。如字符串<code>aaa</code>的长度是3，而模式序列<code>ab*ac*a</code>有5个子模式<code>a,b*,a,c*,a</code>。令g(x,y)表示<span class="math inline">\(s_1s_2\cdots s_x\)</span>与<span class="math inline">\(p_1\cdots p_y\)</span>的匹配状态，如g(x,y)=0表示匹配不成功，g(x,y)=1表示匹配成功。 则g(x,y)有如下递推关系：</p>
 <ul>
-<li>如果$p_y$不是带<code>*</code>子模式，有<code>g(x,y) = g(s_x, p_y) and g(x-1,y-1)</code>。其中$g(s_x, p_y)$表示字符$s_x$与模式$p_y$的匹配状态，很容易计算。特殊的，有<code>g(0,y)=g(0,p_y)=1 if y&gt;=1</code>，以及<code>g(x,0)=g(s_x,0) if x&gt;=1</code>。</li>
-<li>如果$p_y$是带<code>*</code>子模式，有<code>g(x,y)=g(x,y-1) or g(s_x,s_y) and g(x-1,y)</code>。其中，<code>g(x,y-1)=1</code>则说明去掉$p_y$仍匹配，即$p_y$匹配0个字符。而<code>g(s_x,s_y)&amp; g(x-1,y)=1</code>则说明$p_y$匹配一个或多个字符。特殊的，有<code>g(0,y)=g(0,y-1) if y&gt;=1</code></li>
+<li>如果<span class="math inline">\(p_y\)</span>不是带<code>*</code>子模式，有<code>g(x,y) = g(s_x, p_y) and g(x-1,y-1)</code>。其中<span class="math inline">\(g(s_x, p_y)\)</span>表示字符<span class="math inline">\(s_x\)</span>与模式<span class="math inline">\(p_y\)</span>的匹配状态，很容易计算。特殊的，有<code>g(0,y)=g(0,p_y)=1 if y&gt;=1</code>，以及<code>g(x,0)=g(s_x,0) if x&gt;=1</code>。</li>
+<li>如果<span class="math inline">\(p_y\)</span>是带<code>*</code>子模式，有<code>g(x,y)=g(x,y-1) or g(s_x,s_y) and g(x-1,y)</code>。其中，<code>g(x,y-1)=1</code>则说明去掉<span class="math inline">\(p_y\)</span>仍匹配，即<span class="math inline">\(p_y\)</span>匹配0个字符。而<code>g(s_x,s_y)&amp; g(x-1,y)=1</code>则说明<span class="math inline">\(p_y\)</span>匹配一个或多个字符。特殊的，有<code>g(0,y)=g(0,y-1) if y&gt;=1</code></li>
 <li><code>g(0,?)</code>和<code>g(?,0)</code>分别表示空模式和空字符串。</li>
 <li>边界值<code>g(0,0)=1</code></li>
 <li>g(x,y)组成一个维度为<code>(x+1)*(y+1)</code>的二维矩阵。</li>
@@ -462,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/13/algs/arrow4Offer/2019-09-13-54-字符流中第一个不重复的字符/" rel="next" title="剑指54-字符流中第一个不重复的字符">
-                <i class="fa fa-chevron-left"></i> 剑指54-字符流中第一个不重复的字符
+              <a href="/2019/09/13/algs/arrow4Offer/2019-09-13-53-表示数值的字符串/" rel="next" title="剑指53-表示数值的字符串">
+                <i class="fa fa-chevron-left"></i> 剑指53-表示数值的字符串
               </a>
             
           </div>

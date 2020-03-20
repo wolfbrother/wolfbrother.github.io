@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="题目描述 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串&amp;quot;+100&amp;quot;,&amp;quot;5e2&amp;quot;,&amp;quot;-123&amp;quot;,&amp;quot;3.1416&amp;quot;和&amp;quot;-1E-16&amp;quot;都表示数值。 但是&amp;quot;12e&amp;quot;,&amp;quot;1a3.14&amp;quot;,&amp;quot;1.2.3&amp;quot;,&amp;quot;+-5">
+<meta name="description" content="题目描述 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。  模式匹配Python语言关于字符串是否是数值的判断（float(str)），有如下规则：  e和E大小写不敏感，e后面必须是任意整数，e前">
 <meta name="keywords" content="有限状态机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指53-表示数值的字符串">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/13/algs/arrow4Offer/2019-09-13-53-表示数值的字符串/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="题目描述 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串&amp;quot;+100&amp;quot;,&amp;quot;5e2&amp;quot;,&amp;quot;-123&amp;quot;,&amp;quot;3.1416&amp;quot;和&amp;quot;-1E-16&amp;quot;都表示数值。 但是&amp;quot;12e&amp;quot;,&amp;quot;1a3.14&amp;quot;,&amp;quot;1.2.3&amp;quot;,&amp;quot;+-5">
+<meta property="og:description" content="题目描述 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。  模式匹配Python语言关于字符串是否是数值的判断（float(str)），有如下规则：  e和E大小写不敏感，e后面必须是任意整数，e前">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指53-表示数值的字符串">
-<meta name="twitter:description" content="题目描述 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串&amp;quot;+100&amp;quot;,&amp;quot;5e2&amp;quot;,&amp;quot;-123&amp;quot;,&amp;quot;3.1416&amp;quot;和&amp;quot;-1E-16&amp;quot;都表示数值。 但是&amp;quot;12e&amp;quot;,&amp;quot;1a3.14&amp;quot;,&amp;quot;1.2.3&amp;quot;,&amp;quot;+-5">
+<meta name="twitter:description" content="题目描述 请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。  模式匹配Python语言关于字符串是否是数值的判断（float(str)），有如下规则：  e和E大小写不敏感，e后面必须是任意整数，e前">
 
 
 
@@ -396,10 +396,9 @@
 
       
         <p>题目描述</p>
-<p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串&quot;+100&quot;,&quot;5e2&quot;,&quot;-123&quot;,&quot;3.1416&quot;和&quot;-1E-16&quot;都表示数值。 但是&quot;12e&quot;,&quot;1a3.14&quot;,&quot;1.2.3&quot;,&quot;+-5&quot;和&quot;12e+4.3&quot;都不是。</p>
+<p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。</p>
 <hr>
-<h3 id="模式匹配">模式匹配</h3>
-<p>Python语言关于字符串是否是数值的判断（<code>float(str)</code>），有如下规则：</p>
+<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3><p>Python语言关于字符串是否是数值的判断（<code>float(str)</code>），有如下规则：</p>
 <ul>
 <li>e和E大小写不敏感，e后面必须是任意整数，e前面必须有个任意整数或浮点数。如e2非法，1e2.6非法。</li>
 <li>整型数的第一个数字位，如果不是各位，不能为0。如03非法，0合法。然而012e01合法，</li>
@@ -414,8 +413,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[sign]integeral-digits[.[fractional-digits]][eE[sign]exponential-digits]</span><br></pre></td></tr></table></figure>
 <p>那么，一路按上述模式进行匹配就行了。不在分析线上的，或者在分析线上就有问题的，就是不符合标准的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># s字符串</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isNumeric</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        lens = len(s)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> lens == <span class="number">0</span>: <span class="comment">#空字符串直接返回False</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        idx = <span class="number">0</span> <span class="comment"># 首位是符号位</span></span><br><span class="line">        <span class="keyword">if</span> s[<span class="number">0</span>] <span class="keyword">in</span> <span class="string">'+-'</span>:</span><br><span class="line">            <span class="keyword">if</span> lens == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            idx += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">        <span class="keyword">while</span> idx &lt; lens: <span class="comment"># 往下走到遇到小数点或者E</span></span><br><span class="line">            <span class="keyword">if</span> s[idx] <span class="keyword">in</span> <span class="string">'0123456789'</span>:</span><br><span class="line">                idx += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span>          </span><br><span class="line">        <span class="keyword">if</span> idx == lens:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> s[idx] == <span class="string">'.'</span>: <span class="comment"># 小数点及之后，知道遇到E</span></span><br><span class="line">            idx += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> idx &lt; lens:</span><br><span class="line">                <span class="keyword">if</span> s[idx] <span class="keyword">in</span> <span class="string">'0123456789'</span>:</span><br><span class="line">                    idx += <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> idx == lens:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">                </span><br><span class="line">        <span class="keyword">if</span> s[idx] <span class="keyword">in</span> <span class="string">'eE'</span>: <span class="comment"># 检查E</span></span><br><span class="line">            idx += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> idx &lt; lens:</span><br><span class="line">                <span class="keyword">if</span> s[idx] <span class="keyword">in</span> <span class="string">'+-'</span>:</span><br><span class="line">                    idx += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> idx == lens:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">while</span> idx &lt; lens:</span><br><span class="line">                <span class="keyword">if</span> s[idx] <span class="keyword">in</span> <span class="string">'0123456789'</span>:</span><br><span class="line">                    idx += <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> idx == lens:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span> <span class="comment"># 不在上述分析线上的，返回False</span></span><br></pre></td></tr></table></figure>
-<h3 id="有限状态机">有限状态机</h3>
-<p>有七个状态：</p>
+<h3 id="有限状态机"><a href="#有限状态机" class="headerlink" title="有限状态机"></a>有限状态机</h3><p>有七个状态：</p>
 <ul>
 <li>state_0: 开始。</li>
 <li>state_1: 已有正负号。</li>
@@ -426,9 +424,10 @@
 <li>state_6: 已有e和[正负号]和数字</li>
 </ul>
 <p>可以得到状态切换矩阵：</p>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th>正负号</th>
 <th>数字</th>
@@ -438,7 +437,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>state_0</td>
 <td>1</td>
 <td>2</td>
@@ -446,7 +445,7 @@
 <td>F</td>
 <td>F</td>
 </tr>
-<tr class="even">
+<tr>
 <td>state_1</td>
 <td>F</td>
 <td>2</td>
@@ -454,7 +453,7 @@
 <td>F</td>
 <td>F</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>state_2</td>
 <td>F</td>
 <td>2</td>
@@ -462,7 +461,7 @@
 <td>4</td>
 <td>T</td>
 </tr>
-<tr class="even">
+<tr>
 <td>state_3</td>
 <td>F</td>
 <td>3</td>
@@ -470,7 +469,7 @@
 <td>4</td>
 <td>T</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>state_4</td>
 <td>5</td>
 <td>6</td>
@@ -478,7 +477,7 @@
 <td>F</td>
 <td>F</td>
 </tr>
-<tr class="even">
+<tr>
 <td>state_5</td>
 <td>F</td>
 <td>6</td>
@@ -486,7 +485,7 @@
 <td>F</td>
 <td>F</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>state_6</td>
 <td>F</td>
 <td>6</td>
@@ -496,6 +495,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># s字符串</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isNumeric</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        F, T = <span class="literal">False</span>, <span class="literal">True</span></span><br><span class="line">        tx = [</span><br><span class="line">            [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, F, F],</span><br><span class="line">            [F, <span class="number">2</span>, <span class="number">3</span>, F, F],</span><br><span class="line">            [F, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, T],</span><br><span class="line">            [F, <span class="number">3</span>, F, <span class="number">4</span>, T],</span><br><span class="line">            [<span class="number">5</span>, <span class="number">6</span>, F, F, F],</span><br><span class="line">            [F, <span class="number">6</span>, F, F, F],</span><br><span class="line">            [F, <span class="number">6</span>, F, F, T]</span><br><span class="line">        ]</span><br><span class="line">        state = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> <span class="string">'+-'</span>:</span><br><span class="line">                state = tx[state][<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">elif</span> c <span class="keyword">in</span> <span class="string">'0123456789'</span>:</span><br><span class="line">                state = tx[state][<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">elif</span> c <span class="keyword">in</span> <span class="string">'.'</span>:</span><br><span class="line">                state = tx[state][<span class="number">2</span>]</span><br><span class="line">            <span class="keyword">elif</span> c <span class="keyword">in</span> <span class="string">'eE'</span>:</span><br><span class="line">                state = tx[state][<span class="number">3</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> state == <span class="literal">False</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> state <span class="keyword">in</span> [<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 
       
@@ -530,8 +530,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/13/algs/arrow4Offer/2019-09-13-54-字符流中第一个不重复的字符/" rel="next" title="剑指54-字符流中第一个不重复的字符">
-                <i class="fa fa-chevron-left"></i> 剑指54-字符流中第一个不重复的字符
+              <a href="/2019/09/13/algs/arrow4Offer/2019-09-13-55-链表中环的入口结点/" rel="next" title="剑指55-链表中环的入口结点">
+                <i class="fa fa-chevron-left"></i> 剑指55-链表中环的入口结点
               </a>
             
           </div>
@@ -540,8 +540,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/13/algs/arrow4Offer/2019-09-13-52-正则表达式匹配/" rel="prev" title="剑指52-正则表达式匹配">
-                剑指52-正则表达式匹配 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/13/algs/arrow4Offer/2019-09-13-54-字符流中第一个不重复的字符/" rel="prev" title="剑指54-字符流中第一个不重复的字符">
+                剑指54-字符流中第一个不重复的字符 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

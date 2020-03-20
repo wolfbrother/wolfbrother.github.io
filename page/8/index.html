@@ -402,9 +402,8 @@
 输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
 
 非递归版本
-
 首先遍历A，对其每个节点node用check函数判断其能否对应B的根节点rB，并且B是A的子结构。
-check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
+check函数，遍历B，并以B为标准从rB和node核对，B有的结构A也要有，对应节
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -577,7 +576,7 @@ check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
 首先一个辅助节点ListNode(0)
 以及，两个指针，一个用来返回合成后的链表的表头，一个用来辅助合成链表。
 
-12345678910111213141516171819202
+123456789101112131415161718192021class 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -746,7 +745,7 @@ check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
           题目描述
 输入一个链表，反转链表后，输出新链表的表头。
 链表的准备，构建四个节点的单链表，表头是phead：
-123456789101112class Node:    def __init__(self, val):        self.val = val        self.nex
+123456789101112class Node:    def __init__(self, val):        self.val = val        self.next =
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -915,9 +914,8 @@ check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
           题目描述
 输入一个链表，输出该链表中倒数第k个结点。
 
-辅助指针
-从头到尾遍历链表，辅助指针总是指向当前访问节点的之前的第k个节点。
-1234567891011121314class Solution:    def FindKthToTail(self, head, k):       
+辅助指针从头到尾遍历链表，辅助指针总是指向当前访问节点的之前的第k个节点。
+1234567891011121314class Solution:    def FindKthToTail(self, head, k):        # wri
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1086,9 +1084,8 @@ check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
           题目描述
 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
 
-辅助数组法
-遍历一次数组，将其中的奇数和偶数分别摘出来放在两个辅助数组里，再将辅助数组合并。
-1234567
+辅助数组法遍历一次数组，将其中的奇数和偶数分别摘出来放在两个辅助数组里，再将辅助数组合并。
+1234567891011
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1259,7 +1256,7 @@ check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
 
 
 负幂转为正幂，便于操作。方法：对于a的b次幂a**b，如果b&lt;0，则a**b等价于(1.0/a)**(-b)。
-提高效率，有公式：a**(2b)=(a**b)
+提高效率，有公式：a**(2b)=(a**b)**2, 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1436,7 +1433,7 @@ check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
 
 负数的补码最高位1，右移则在最高位补1而不是0。因此负数时要限定位移运算子使用次数。
 
-1234567
+12345678910class S
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1607,11 +1604,11 @@ check函数，遍历B，并以B为标准从rB和node核对，B有的结构A
 
 
 按第一个小矩形靠近一端的摆放方式，可以分为互斥且互补的两个空间：
-
 横放，有F(n-2)种方法
 竖放，有F(n-1)种方法
 
-因此有F(n
+
+因此有F(n) = F(n-1
           ...
           <!--noindex-->
           <div class="post-button text-center">

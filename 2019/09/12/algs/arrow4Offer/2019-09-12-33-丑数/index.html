@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="题目描述 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  定义了一个丑数递增序列L,和列表L上的三个下标ix2、ix3、ix5为：  ix2是满足2*L[ix2]&amp;gt;L[-1]的最小, ix3是满足3*L[ix3]&amp;gt;L[-1]的最小, i">
+<meta name="description" content="题目描述 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  定义了一个丑数递增序列L,和列表L上的三个下标ix2、ix3、ix5为：  ix2是满足2*L[ix2]&amp;gt;L[-1]的最小,  ix3是满足3*L[ix3]&amp;gt;L[-1]的最小,  ix5是满足">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指33-丑数">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/12/algs/arrow4Offer/2019-09-12-33-丑数/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="题目描述 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  定义了一个丑数递增序列L,和列表L上的三个下标ix2、ix3、ix5为：  ix2是满足2*L[ix2]&amp;gt;L[-1]的最小, ix3是满足3*L[ix3]&amp;gt;L[-1]的最小, i">
+<meta property="og:description" content="题目描述 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  定义了一个丑数递增序列L,和列表L上的三个下标ix2、ix3、ix5为：  ix2是满足2*L[ix2]&amp;gt;L[-1]的最小,  ix3是满足3*L[ix3]&amp;gt;L[-1]的最小,  ix5是满足">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指33-丑数">
-<meta name="twitter:description" content="题目描述 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  定义了一个丑数递增序列L,和列表L上的三个下标ix2、ix3、ix5为：  ix2是满足2*L[ix2]&amp;gt;L[-1]的最小, ix3是满足3*L[ix3]&amp;gt;L[-1]的最小, i">
+<meta name="twitter:description" content="题目描述 把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。 习惯上我们把1当做是第一个丑数。求按从小到大的顺序的第N个丑数。  定义了一个丑数递增序列L,和列表L上的三个下标ix2、ix3、ix5为：  ix2是满足2*L[ix2]&amp;gt;L[-1]的最小,  ix3是满足3*L[ix3]&amp;gt;L[-1]的最小,  ix5是满足">
 
 
 
@@ -399,12 +399,12 @@
 <hr>
 <p>定义了一个丑数递增序列L,和列表<code>L</code>上的三个下标ix2、ix3、ix5为：</p>
 <ul>
-<li>ix2是满足<code>2*L[ix2]&gt;L[-1]</code>的最小,</li>
-<li>ix3是满足<code>3*L[ix3]&gt;L[-1]</code>的最小,</li>
+<li>ix2是满足<code>2*L[ix2]&gt;L[-1]</code>的最小, </li>
+<li>ix3是满足<code>3*L[ix3]&gt;L[-1]</code>的最小, </li>
 <li>ix5是满足<code>5*L[ix5]&gt;L[-1]</code>的最小。</li>
 </ul>
 <p>其中<code>L[-1]</code>是列表L的最后一个元素。</p>
-<p>由于丑数是只包含质因子2、3和5的数，那么下一个丑数必然出自<code>L[ix2]*2,L[ix3]*3,L[ix5]*5</code>这三个数。</p>
+<p>由于丑数是只包含质因子2、3和5的数，那么下一个丑数必然出自<code>L[ix2]*2,L[ix3]*3,L[ix5]*5</code>这三个数。 </p>
 <p>可以证明：如果<code>L[ix2]*2</code>被选中，则更新公式必然是<code>ix2 += 1</code>。如下证明<code>ix2+1</code>是满足<code>2*L[ix2+1]&gt;L[ix2]*2</code>的最小：</p>
 <ul>
 <li>由于<code>L[ix2+1]&gt;L[ix2]</code>,则<code>L[ix2+1]*2&gt;L[ix2]*2=L[-1]</code>，这里<code>L[-1]</code>是刚添加进L的<code>L[ix2]*2</code>。即<code>ix2+1</code>必然满足。</li>

@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="生成模型和判别模型 生成模型  有朴素贝叶斯和隐形马尔科夫链。  判别模型  有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。  损失函数 误分点到超平面距离 对数似然损失 逻辑斯蒂损失 合页损失 指数损失 评估结果的几个参数  查准率和查全率，可以根据字面理解其含义，并画出图 连接 ，并结合图给出真阳率和真阴率的概念。另外，查准">
+<meta name="description" content="生成模型和判别模型生成模型 有朴素贝叶斯和隐形马尔科夫链。  判别模型 有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。  损失函数误分点到超平面距离对数似然损失逻辑斯蒂损失合页损失指数损失评估结果的几个参数 查准率和查全率，可以根据字面理解其含义，并画出图 连接 ，并结合图给出真阳率和真阴率的概念。另外，查准率和查全率分别对应精确率P和召回率R，以这样的方式来记">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习概念总结三分之三部">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之三部/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="生成模型和判别模型 生成模型  有朴素贝叶斯和隐形马尔科夫链。  判别模型  有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。  损失函数 误分点到超平面距离 对数似然损失 逻辑斯蒂损失 合页损失 指数损失 评估结果的几个参数  查准率和查全率，可以根据字面理解其含义，并画出图 连接 ，并结合图给出真阳率和真阴率的概念。另外，查准">
+<meta property="og:description" content="生成模型和判别模型生成模型 有朴素贝叶斯和隐形马尔科夫链。  判别模型 有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。  损失函数误分点到超平面距离对数似然损失逻辑斯蒂损失合页损失指数损失评估结果的几个参数 查准率和查全率，可以根据字面理解其含义，并画出图 连接 ，并结合图给出真阳率和真阴率的概念。另外，查准率和查全率分别对应精确率P和召回率R，以这样的方式来记">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习概念总结三分之三部">
-<meta name="twitter:description" content="生成模型和判别模型 生成模型  有朴素贝叶斯和隐形马尔科夫链。  判别模型  有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。  损失函数 误分点到超平面距离 对数似然损失 逻辑斯蒂损失 合页损失 指数损失 评估结果的几个参数  查准率和查全率，可以根据字面理解其含义，并画出图 连接 ，并结合图给出真阳率和真阴率的概念。另外，查准">
+<meta name="twitter:description" content="生成模型和判别模型生成模型 有朴素贝叶斯和隐形马尔科夫链。  判别模型 有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。  损失函数误分点到超平面距离对数似然损失逻辑斯蒂损失合页损失指数损失评估结果的几个参数 查准率和查全率，可以根据字面理解其含义，并画出图 连接 ，并结合图给出真阳率和真阴率的概念。另外，查准率和查全率分别对应精确率P和召回率R，以这样的方式来记">
 
 
 
@@ -395,57 +395,49 @@
       
 
       
-        <h2 id="生成模型和判别模型">生成模型和判别模型</h2>
-<h4 id="生成模型">生成模型</h4>
-<ul>
+        <h2 id="生成模型和判别模型"><a href="#生成模型和判别模型" class="headerlink" title="生成模型和判别模型"></a>生成模型和判别模型</h2><h4 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h4><ul>
 <li>有朴素贝叶斯和隐形马尔科夫链。</li>
 </ul>
-<h4 id="判别模型">判别模型</h4>
-<ul>
+<h4 id="判别模型"><a href="#判别模型" class="headerlink" title="判别模型"></a>判别模型</h4><ul>
 <li>有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。</li>
 </ul>
-<h2 id="损失函数">损失函数</h2>
-<h4 id="误分点到超平面距离">误分点到超平面距离</h4>
-<h4 id="对数似然损失">对数似然损失</h4>
-<h4 id="逻辑斯蒂损失">逻辑斯蒂损失</h4>
-<h4 id="合页损失">合页损失</h4>
-<h4 id="指数损失">指数损失</h4>
-<h2 id="评估结果的几个参数">评估结果的几个参数</h2>
-<ul>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><h4 id="误分点到超平面距离"><a href="#误分点到超平面距离" class="headerlink" title="误分点到超平面距离"></a>误分点到超平面距离</h4><h4 id="对数似然损失"><a href="#对数似然损失" class="headerlink" title="对数似然损失"></a>对数似然损失</h4><h4 id="逻辑斯蒂损失"><a href="#逻辑斯蒂损失" class="headerlink" title="逻辑斯蒂损失"></a>逻辑斯蒂损失</h4><h4 id="合页损失"><a href="#合页损失" class="headerlink" title="合页损失"></a>合页损失</h4><h4 id="指数损失"><a href="#指数损失" class="headerlink" title="指数损失"></a>指数损失</h4><h2 id="评估结果的几个参数"><a href="#评估结果的几个参数" class="headerlink" title="评估结果的几个参数"></a>评估结果的几个参数</h2><ul>
 <li>查准率和查全率，可以根据字面理解其含义，并画出图 <a href="https://img-blog.csdn.net/20150707170145495" target="_blank" rel="noopener">连接</a> ，并结合图给出真阳率和真阴率的概念。另外，查准率和查全率分别对应精确率P和召回率R，以这样的方式来记忆准确率和召回率，不然就太难记了。</li>
-<li>然后根据精确率P和召回率R写出 <span class="math inline">\(F_1=\frac{PR}{P+R}\)</span> 的公式，以及准确率的公式<span class="math inline">\(A_{cc}=\frac{TN+TP}{ALL}\)</span>。然后给出ROC曲线的横坐标和纵坐标（分别是假阳率和真阳率），以及AUC的含义。</li>
+<li>然后根据精确率P和召回率R写出 $F<em>1=\frac{PR}{P+R}$ 的公式，以及准确率的公式$A</em>{cc}=\frac{TN+TP}{ALL}$。然后给出ROC曲线的横坐标和纵坐标（分别是假阳率和真阳率），以及AUC的含义。</li>
 <li>以上面的图结合ROC来分析，横纵坐标分别是途中的判别线（虚线）左侧的两个部分分别占所在椭圆的比例，而AUC的大小可以用来作为两个椭圆映射到与水平方向上的重合度，这个重合度与模型的判别效果有关。具体的，判别效果最差的情况，二者重合，那么假阳率和真阳率的变化相同，是一条直线，AUC是0.5；最好的情况，二者完全没有重合，则是个直角，AUC是1。</li>
-<li>物体识别领域的MAP（mean average precision）的概念，以及从P到AP再到MAP的层层递进。可以参考 <a href="https://blog.csdn.net/katherine_hsr/article/details/79266880" target="_blank" rel="noopener">连接</a>
-<ul>
+<li>物体识别领域的MAP（mean average precision）的概念，以及从P到AP再到MAP的层层递进。可以参考 <a href="https://blog.csdn.net/katherine_hsr/article/details/79266880" target="_blank" rel="noopener">连接</a><ul>
 <li>P是某一张图片里某个类的物体，能够检测到的个数除以该类物体的总的个数</li>
 <li>AP是对于某个类，所有照片的P值的均值</li>
 <li>MAP是AP在所有类上的均值。</li>
-</ul></li>
 </ul>
-<p>## 深度学习中梯度消失，和激活函数Relu，sigmoid ，tanh的区别</p>
+</li>
+</ul>
+<h2 id="深度学习中梯度消失，和激活函数Relu，sigmoid-，tanh的区别"><a href="#深度学习中梯度消失，和激活函数Relu，sigmoid-，tanh的区别" class="headerlink" title="深度学习中梯度消失，和激活函数Relu，sigmoid ，tanh的区别"></a>深度学习中梯度消失，和激活函数Relu，sigmoid ，tanh的区别</h2><ul>
+<li><p>激活函数通常有以下性质： </p>
 <ul>
-<li>激活函数通常有以下性质：
-<ul>
-<li>非线性：如果激活函数都为线性，那么神经网络的最终输出都是和输入呈线性关系（矩阵连乘）；显然这不符合事实。</li>
-<li>可导性：神经网络的优化都是基于梯度的，求解梯度时需要确保函数可导。</li>
-<li>单调性:激活函数是单调的，否则不能保证神经网络抽象的优化问题为凸优化问题了。</li>
-<li>输出范围有限：激活函数的输出值的范围是有限时，基于梯度的方法会更加稳定。</li>
-</ul></li>
-<li>参考<a href="http://www.voidcn.com/article/p-tmaepxar-bms.html" target="_blank" rel="noopener">连接</a> 和<a href="https://zhuanlan.zhihu.com/p/38537439" target="_blank" rel="noopener">连接</a></li>
-<li>梯度牵涉到链式求导运算，每层因子相乘的结果不断减小，产生梯度消失，会造成网络的前层网络的权重的梯度很小，这些w很可能得不到更新；而如果相乘的结果越来越大，则产生梯度爆炸。sigmoid和tanh都有这个问题，而relu没有。如下解决办法:
-<ul>
+<li>非线性：如果激活函数都为线性，那么神经网络的最终输出都是和输入呈线性关系（矩阵连乘）；显然这不符合事实。 </li>
+<li>可导性：神经网络的优化都是基于梯度的，求解梯度时需要确保函数可导。 </li>
+<li>单调性:激活函数是单调的，否则不能保证神经网络抽象的优化问题为凸优化问题了。 </li>
+<li><p>输出范围有限：激活函数的输出值的范围是有限时，基于梯度的方法会更加稳定。</p>
+</li>
+<li><p>参考<a href="http://www.voidcn.com/article/p-tmaepxar-bms.html" target="_blank" rel="noopener">连接</a> 和<a href="https://zhuanlan.zhihu.com/p/38537439" target="_blank" rel="noopener">连接</a></p>
+</li>
+<li>梯度牵涉到链式求导运算，每层因子相乘的结果不断减小，产生梯度消失，会造成网络的前层网络的权重的梯度很小，这些w很可能得不到更新；而如果相乘的结果越来越大，则产生梯度爆炸。sigmoid和tanh都有这个问题，而relu没有。如下解决办法:<ul>
 <li>1、使用relu类激活函数，他们求导过程中梯度为1，不同网络层的权重可以得到同速度的更新</li>
 <li>2、Batch normalization. 具有加速网络收敛速度，提升训练稳定性的效果，Batchnorm本质上是解决反向传播过程中的梯度问题。batchnorm全名是batch normalization，简称BN，即批规范化，通过规范化操作将输出信号x规范化保证网络的稳定性。batchnorm就是通过对每一层的输出规范为均值和方差一致的方法，消除了每层x带来的放大缩小的影响，进而解决梯度消失和爆炸的问题，或者可以理解为BN将输出从饱和区拉倒了非饱和区。</li>
 <li>3、残差网络。非常深的网络很难训练，存在梯度消失和梯度爆炸问题，学习 skip connection它可以从某一层获得激活，然后迅速反馈给另外一层甚至更深层，利用 skip connection可以构建残差网络ResNet来训练更深的网络，ResNet网络是由残差模块构建的</li>
-</ul></li>
+</ul>
+</li>
 <li>ReLU 也有缺点，就是训练的时候很”脆弱”，很容易就”die”了。一个非常大的梯度流过一个 ReLU 神经元，更新过参数之后，这个神经元再也不会对任何数据有激活现象了。如果这个情况发生了，那么这个神经元的梯度就永远都会是0.实际操作中，如果你的learning rate 很大，那么很有可能你网络中的40%的神经元都”dead”了。 当然，如果你设置了一个合适的较小的learning rate，这个问题发生的情况其实也不会太频繁。</li>
-<li>单纯看sigmoid，它主要有以下缺点：
-<ul>
+<li>单纯看sigmoid，它主要有以下缺点：<ul>
 <li>梯度消失（Gradient Vanishing） 会导致BP时，w的系数太小，w更新很慢。所以对初始化时要特别注意，避免过大的初始值使神经元进入饱和区。</li>
 <li>输出不是zero-center 这会导致后层的神经元的输入是非0均值的信号，这会对梯度产生影响：假设后层神经元的输入都为正(e.g. x&gt;0 elementwise in ),那么对w求局部梯度则都为正，这样在反向传播的过程中w要么都往正方向更新，要么都往负方向更新，导致有一种捆绑的效果，使得收敛缓慢。 如果你是按batch去训练，那么每个batch可能得到不同的符号（正或负），那么相加一下这个问题还是可以缓解</li>
 <li>指数运算耗时，计算效率低</li>
-</ul></li>
+</ul>
+</li>
 <li>tanh和relu相比sigmoid计算效率高，但tanh和sigmoid都有梯度消失现象，而relu容易死。</li>
+</ul>
+</li>
 </ul>
 
       
@@ -480,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之二部/" rel="next" title="机器学习概念总结三分之二部">
-                <i class="fa fa-chevron-left"></i> 机器学习概念总结三分之二部
+              <a href="/2019/09/09/algs/general/2019-09-10-排序算法/" rel="next" title="排序算法">
+                <i class="fa fa-chevron-left"></i> 排序算法
               </a>
             
           </div>
@@ -490,8 +482,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/09/ML-AI/2019-09-09-统计学习方法的总结/" rel="prev" title="统计学习方法的总结">
-                统计学习方法的总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/09/ML-AI/2019-09-09-机器学习概念总结三分之二部/" rel="prev" title="机器学习概念总结三分之二部">
+                机器学习概念总结三分之二部 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -652,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成模型和判别模型"><span class="nav-number">1.</span> <span class="nav-text">生成模型和判别模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成模型"><span class="nav-number">1.0.1.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判别模型"><span class="nav-number">1.0.2.</span> <span class="nav-text">判别模型</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">2.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#误分点到超平面距离"><span class="nav-number">2.0.1.</span> <span class="nav-text">误分点到超平面距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对数似然损失"><span class="nav-number">2.0.2.</span> <span class="nav-text">对数似然损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑斯蒂损失"><span class="nav-number">2.0.3.</span> <span class="nav-text">逻辑斯蒂损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合页损失"><span class="nav-number">2.0.4.</span> <span class="nav-text">合页损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指数损失"><span class="nav-number">2.0.5.</span> <span class="nav-text">指数损失</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估结果的几个参数"><span class="nav-number">3.</span> <span class="nav-text">评估结果的几个参数</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成模型和判别模型"><span class="nav-number">1.</span> <span class="nav-text">生成模型和判别模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成模型"><span class="nav-number">1.0.1.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判别模型"><span class="nav-number">1.0.2.</span> <span class="nav-text">判别模型</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">2.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#误分点到超平面距离"><span class="nav-number">2.0.1.</span> <span class="nav-text">误分点到超平面距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对数似然损失"><span class="nav-number">2.0.2.</span> <span class="nav-text">对数似然损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑斯蒂损失"><span class="nav-number">2.0.3.</span> <span class="nav-text">逻辑斯蒂损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合页损失"><span class="nav-number">2.0.4.</span> <span class="nav-text">合页损失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指数损失"><span class="nav-number">2.0.5.</span> <span class="nav-text">指数损失</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估结果的几个参数"><span class="nav-number">3.</span> <span class="nav-text">评估结果的几个参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度学习中梯度消失，和激活函数Relu，sigmoid-，tanh的区别"><span class="nav-number">4.</span> <span class="nav-text">深度学习中梯度消失，和激活函数Relu，sigmoid ，tanh的区别</span></a></li></div>
             
 
           </div>

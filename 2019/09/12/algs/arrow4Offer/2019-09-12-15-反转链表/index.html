@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="题目描述 输入一个链表，反转链表后，输出新链表的表头。 链表的准备，构建四个节点的单链表，表头是phead： 123456789101112class Node:    def __init__(self, val):        self.val = val        self.next = NonenodeList = [Node(1),Node(2),Node(3),Node(4">
+<meta name="description" content="题目描述 输入一个链表，反转链表后，输出新链表的表头。 链表的准备，构建四个节点的单链表，表头是phead： 123456789101112class Node:    def __init__(self, val):        self.val = val        self.next = NonenodeList = [Node(1),Node(2),Node(3),Node(4)]p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指15-反转链表">
 <meta property="og:url" content="https://wolfbrother.github.io/2019/09/12/algs/arrow4Offer/2019-09-12-15-反转链表/index.html">
 <meta property="og:site_name" content="狼哥空间">
-<meta property="og:description" content="题目描述 输入一个链表，反转链表后，输出新链表的表头。 链表的准备，构建四个节点的单链表，表头是phead： 123456789101112class Node:    def __init__(self, val):        self.val = val        self.next = NonenodeList = [Node(1),Node(2),Node(3),Node(4">
+<meta property="og:description" content="题目描述 输入一个链表，反转链表后，输出新链表的表头。 链表的准备，构建四个节点的单链表，表头是phead： 123456789101112class Node:    def __init__(self, val):        self.val = val        self.next = NonenodeList = [Node(1),Node(2),Node(3),Node(4)]p">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-03-20T06:11:23.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指15-反转链表">
-<meta name="twitter:description" content="题目描述 输入一个链表，反转链表后，输出新链表的表头。 链表的准备，构建四个节点的单链表，表头是phead： 123456789101112class Node:    def __init__(self, val):        self.val = val        self.next = NonenodeList = [Node(1),Node(2),Node(3),Node(4">
+<meta name="twitter:description" content="题目描述 输入一个链表，反转链表后，输出新链表的表头。 链表的准备，构建四个节点的单链表，表头是phead： 123456789101112class Node:    def __init__(self, val):        self.val = val        self.next = NonenodeList = [Node(1),Node(2),Node(3),Node(4)]p">
 
 
 
@@ -399,16 +399,13 @@
 <p>链表的准备，构建四个节点的单链表，表头是phead：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Node:</span><br><span class="line">    def __init__(self, val):</span><br><span class="line">        self.val = val</span><br><span class="line">        self.next = None</span><br><span class="line"></span><br><span class="line">nodeList = [Node(1),Node(2),Node(3),Node(4)]</span><br><span class="line">phead = nodeList[0]</span><br><span class="line">for i in range(len(nodeList)-1):</span><br><span class="line">    nodeList[i].next = nodeList[i+1]</span><br><span class="line">p = phead</span><br><span class="line">while p is not None:</span><br><span class="line">    p = p.next</span><br></pre></td></tr></table></figure>
 <hr>
-<h4 id="辅助列表">辅助列表</h4>
-<p>遍历链表，用一个列表存储遍历到的所有节点，然后从后往前新建反转版本的链表。</p>
+<h4 id="辅助列表"><a href="#辅助列表" class="headerlink" title="辅助列表"></a>辅助列表</h4><p>遍历链表，用一个列表存储遍历到的所有节点，然后从后往前新建反转版本的链表。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回ListNode</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">ReverseList</span><span class="params">(self, pHead)</span>:</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> pHead <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> pHead.next <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> pHead</span><br><span class="line">            </span><br><span class="line">        mylist = []</span><br><span class="line">        <span class="keyword">while</span> pHead <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            mylist.append(pHead)</span><br><span class="line">            pHead = pHead.next</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(mylist)):</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                mylist[i].next = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                mylist[i].next = mylist[i<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">return</span> mylist[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
 <hr>
-<h4 id="递归的方法翻转链表">递归的方法翻转链表</h4>
-<p>记输入链表是L0=phead+L1。既然用递归，则函数的输入是L0的表头phead，输出是新链表的表头，即L0的尾节点。内部调用自身的语句的输入应该是L1，其输出是L1的尾结点，也是L0的尾结点，新的表尾也就是L0的表头指向None。可知新链表的表头从递归的最深层，一路传送到最上层。亦可知，之后需要处理链表与子链表的衔接，即<code>phead.next.next = phead; phead.next = None</code>，L1的原表头即phead.next要指向phead。：</p>
+<h4 id="递归的方法翻转链表"><a href="#递归的方法翻转链表" class="headerlink" title="递归的方法翻转链表"></a>递归的方法翻转链表</h4><p>记输入链表是L0=phead+L1。既然用递归，则函数的输入是L0的表头phead，输出是新链表的表头，即L0的尾节点。内部调用自身的语句的输入应该是L1，其输出是L1的尾结点，也是L0的尾结点，新的表尾也就是L0的表头指向None。可知新链表的表头从递归的最深层，一路传送到最上层。亦可知，之后需要处理链表与子链表的衔接，即<code>phead.next.next = phead; phead.next = None</code>，L1的原表头即phead.next要指向phead。：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverseL</span><span class="params">(phead)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> phead <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> phead.next <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> phead</span><br><span class="line">    </span><br><span class="line">    node = reverseL(phead.next)</span><br><span class="line">    phead.next.next = phead</span><br><span class="line">    phead.next = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure>
 <hr>
-<h4 id="非递归的方法翻转链表">非递归的方法翻转链表</h4>
-<ul>
+<h4 id="非递归的方法翻转链表"><a href="#非递归的方法翻转链表" class="headerlink" title="非递归的方法翻转链表"></a>非递归的方法翻转链表</h4><ul>
 <li>递归和非递归两种翻转方法，对输入的检测都是一样的逻辑<code>if not phead or not phead.next: return phead</code></li>
 <li>每次循环，都要拿到前两个节点的指针p和q，循环以q.next的存在性判断是否终止</li>
 <li>更新p,q和连接时需要一个临时节点指针</li>
@@ -454,8 +451,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/12/algs/arrow4Offer/2019-09-12-14-链表中倒数第k个结点/" rel="prev" title="剑指14-链表中倒数第k个结点">
-                剑指14-链表中倒数第k个结点 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/12/algs/arrow4Offer/2019-09-12-13-调整数组顺序使奇数位于偶数前面/" rel="prev" title="剑指13-调整数组顺序使奇数位于偶数前面">
+                剑指13-调整数组顺序使奇数位于偶数前面 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

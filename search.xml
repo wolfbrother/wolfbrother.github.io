@@ -173,8 +173,8 @@
         <category>刷题</category>
       </categories>
       <tags>
-        <tag>递归</tag>
         <tag>动态规划</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -2194,54 +2194,60 @@ GMM模型里是是[0,1]区间的变量（p164 <span class="math inline">\(\hat{\
       </tags>
   </entry>
   <entry>
-    <title>机器学习概念总结三分之二部</title>
-    <url>/2019/09/09/ML-AI/2019-09-09-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E4%B9%8B%E4%BA%8C%E9%83%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="过拟合">过拟合</h2>
-<p>随着训练过程的进行，在训练集上的错误率渐渐减小，但是在验证集上的错误率却反而渐渐增大。也就是说训练出来的网络过拟合了训练集，对训练集外的数据却不工作。</p>
-<p>过拟合是一种在项目实践中遇到的一个常见的现象，并不是一种高深的理论。“简单函数的泛化能力更好”不是一个有着坚实理论和数学基础的理论定理，它只是在长久的数据科学项目中，数据科学家们发现的一个普遍现象。可以理解为属于 经验科学 的一个范畴，简单的模型不容易产生过拟合，简单的模型泛化能力更好，甚至所谓的奥卡姆剃刀原理。这个经验在很多时候是有效的，我们也没有什幺理由不去应用这个经验。毕竟数据科学还是一个偏向实践和以结果说话的学科，得到好的结果是最重要的。</p>
-<p>过拟合的原因 （<a href="https://zhuanlan.zhihu.com/p/26122044" target="_blank" rel="noopener">大白话解释模型产生过拟合的原因</a>有具体的例子，<a href="https://flashgene.com/archives/11824.html" target="_blank" rel="noopener">浅议过拟合现象(overfitting)以及正则化技术原理</a>）： + 数据有噪声 + 训练数据不足，在有限的样本中搜索过大的模型空间 + 训练模型过度导致模型非常复杂</p>
-<p>避免过拟合的方法 （<a href="https://zhuanlan.zhihu.com/p/26122044" target="_blank" rel="noopener">大白话解释模型产生过拟合的原因</a>）：</p>
+    <title>机器学习概念总结三分之三部</title>
+    <url>/2019/09/09/ML-AI/2019-09-09-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E4%B9%8B%E4%B8%89%E9%83%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="生成模型和判别模型">生成模型和判别模型</h2>
+<h4 id="生成模型">生成模型</h4>
 <ul>
-<li>early stopping</li>
-<li>数据集扩增（Data augmentation）</li>
-<li>正则化（Regularization）包括L1、L2（L2 regularization也叫weight decay）</li>
-<li>dropout (<a href="https://www.cnblogs.com/alexanderkun/p/6922428.html" target="_blank" rel="noopener">正则化为什么能防止过拟合</a>)。</li>
-<li>最大池化层（maxpool）</li>
+<li>有朴素贝叶斯和隐形马尔科夫链。</li>
 </ul>
-<p>其它：</p>
+<h4 id="判别模型">判别模型</h4>
 <ul>
-<li><a href="https://www.jianshu.com/p/a9cc62db419e" target="_blank" rel="noopener">正则化为什么能防止过拟合</a> 直观地说明了在多项式拟合里，为什么过拟合的系数比较大，进而说明正则化（不管是L1还是L2都能让参数趋于小）对过拟合有用：过拟合，就是拟合函数需要顾忌每一个点，最终形成的拟合函数波动很大。在某些很小的区间里，函数值的变化很剧烈。这就意味着函数在某些小区间里的导数值（绝对值）非常大，由于自变量值可大可小，所以只有系数足够大，才能保证导数值很大。</li>
-<li>术语&quot;泛化&quot;指的是一个假设模型能够应用到新样本的能力。新样本数据是指没有出现在训练集中的数据。</li>
+<li>有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。</li>
 </ul>
-<h4 id="高偏差与高方差"><a href="https://www.jianshu.com/p/a585d5506b1e" target="_blank" rel="noopener">高偏差与高方差</a></h4>
+<h2 id="损失函数">损失函数</h2>
+<h4 id="误分点到超平面距离">误分点到超平面距离</h4>
+<h4 id="对数似然损失">对数似然损失</h4>
+<h4 id="逻辑斯蒂损失">逻辑斯蒂损失</h4>
+<h4 id="合页损失">合页损失</h4>
+<h4 id="指数损失">指数损失</h4>
+<h2 id="评估结果的几个参数">评估结果的几个参数</h2>
 <ul>
-<li>过拟合意味着高方差，欠拟合意味着高偏差（https://www.cnblogs.com/jianxinzhou/p/4083921.html ）</li>
-<li>偏差（bias）：我们要预测第二天的收益，而估值指标经常用于长线投资，虽然每次预测都是信誓旦旦，但是模型从本质上就把目标搞错了。</li>
-<li>方差（variance）：过多的已知条件，导致模型无法给出确定的预测，预测结果和瞎蒙一样，给人的感觉是不靠谱。</li>
-<li>无法消除的误差：我们都知道，完美预测第二天的情况，是不可能的。这样的误差难以消除，我们希望它越小越好，一般就忽略掉了。所以，我们可以优化的误差=偏差+方差 相关描述可以看一下知乎答案：<a href="https://www.zhihu.com/question/20700829/answer/119314862" target="_blank" rel="noopener">链接</a></li>
-</ul>
-<h2 id="贝叶斯学派和频率学派">贝叶斯学派和频率学派</h2>
+<li>查准率和查全率，可以根据字面理解其含义，并画出图 <a href="https://img-blog.csdn.net/20150707170145495" target="_blank" rel="noopener">连接</a> ，并结合图给出真阳率和真阴率的概念。另外，查准率和查全率分别对应精确率P和召回率R，以这样的方式来记忆准确率和召回率，不然就太难记了。</li>
+<li>然后根据精确率P和召回率R写出 <span class="math inline">\(F_1=\frac{PR}{P+R}\)</span> 的公式，以及准确率的公式<span class="math inline">\(A_{cc}=\frac{TN+TP}{ALL}\)</span>。然后给出ROC曲线的横坐标和纵坐标（分别是假阳率和真阳率），以及AUC的含义。</li>
+<li>以上面的图结合ROC来分析，横纵坐标分别是途中的判别线（虚线）左侧的两个部分分别占所在椭圆的比例，而AUC的大小可以用来作为两个椭圆映射到与水平方向上的重合度，这个重合度与模型的判别效果有关。具体的，判别效果最差的情况，二者重合，那么假阳率和真阳率的变化相同，是一条直线，AUC是0.5；最好的情况，二者完全没有重合，则是个直角，AUC是1。</li>
+<li>物体识别领域的MAP（mean average precision）的概念，以及从P到AP再到MAP的层层递进。可以参考 <a href="https://blog.csdn.net/katherine_hsr/article/details/79266880" target="_blank" rel="noopener">连接</a>
 <ul>
-<li>先验概率、似然函数与后验概率</li>
+<li>P是某一张图片里某个类的物体，能够检测到的个数除以该类物体的总的个数</li>
+<li>AP是对于某个类，所有照片的P值的均值</li>
+<li>MAP是AP在所有类上的均值。</li>
+</ul></li>
 </ul>
-<p>似然函数（likelihood function），也称作似然，是一个关于统计模型参数的函数。也就是这个函数中自变量是统计模型的参数。对于结果 x ，在参数集合 θ 上的似然，就是在给定这些参数值的基础上，观察到的结果的概率 <span class="math inline">\(L(θ\mid x)=P(x\mid θ)\)</span>。也就是说，似然是关于参数的函数，在参数给定的条件下，对于观察到的 x 的值的条件分布。</p>
-<p>用<span class="math inline">\((θ)\)</span>表示概率分布函数，用 <span class="math inline">\(p(x\mid θ)\)</span>表示观测值 x 的似然函数。后验概率定义为： <span class="math inline">\(p(θ\mid x)=\frac{p(x\mid θ)p(θ)}{p(x)}\)</span> 。由于分母不变，可以表达成如下正比关系： 后验概率<span class="math inline">\(p(θ\mid x)\)</span> ∝ 似然函数<span class="math inline">\(p(x\mid θ)\)</span>×先验概率p(x)</p>
-<p><a href="https://www.cnblogs.com/wjgaas/p/4523779.html" target="_blank" rel="noopener">先验概率、似然函数与后验概率</a> 最大后验概率和极大似然估计很像，只是多了一项先验分布，它体现了贝叶斯认为参数也是随机变量的观点，在实际运算中通常通过超参数给出先验分布。极大似然估计和最大后验概率都是参数的点估计。在频率学派中，参数固定了，预测值也就固定了。最大后验概率是贝叶斯学派的一种近似手段，因为完全贝叶斯估计不一定可行。另一方面，最大后验概率可以看作是对先验和MLE的一种折衷，如果数据量足够大，最大后验概率和最大似然估计趋向于一致，如果数据为0,最大后验仅由先验决定。</p>
-<p>用抛硬币的例子来依次讲解极大似然估计、最大后验概率估计和贝叶斯估计：<a href="https://blog.csdn.net/yangliuy/article/details/8296481" target="_blank" rel="noopener">链接</a></p>
-<h2 id="拉格朗日乘子法">拉格朗日乘子法</h2>
-<p>分为只含有等式约束，以及含有不等式约束两种情况。</p>
-<h4 id="只有等式约束">只有等式约束</h4>
-<p>参考 维基百科<a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0" target="_blank" rel="noopener">拉格朗日乘数</a>。例如如下特征，即目标函数取极值时目标函数和各个等式约束的在该极值处相切，即它们在极值处梯度方向相等或者相反，即它们的各个偏导数成比例关系。</p>
-<p>举例：<span class="math inline">\(f(x,y)\)</span>在<span class="math inline">\(g(x,y) = c\)</span>约束下的极值问题，则极值点<span class="math inline">\((x_0,y_0)\)</span>处有<span class="math inline">\(f_x+\lambda g_x = 0, f_y+\lambda g_y=0\)</span>，同时有<span class="math inline">\(g(x_0,y_0)=c\)</span>。因此就将原来的约束优化问题，转换成如下拥有三个自变量<span class="math inline">\((x,y,\lambda)\)</span>的无约束极值问题 <span class="math inline">\(f(x,y)+\lambda (g(x,y)-c)\)</span>，其中<span class="math inline">\(\lambda\)</span>任意取值。</p>
-<p>对该无约束问题进行分析，由于<span class="math inline">\(\lambda\)</span>可以任意取值，因此只能由<span class="math inline">\(g(x,y)-c=0\)</span>，另外取极值时梯度为0，即<span class="math inline">\(f&#39;+\lambda g&#39;=0\)</span>，可见于原约束优化问题是等价的。</p>
-<p>其中原约束优化问题是“原始问题”，转换后的无约束优化问题是“对偶问题”，二者最优解等价的条件就是取该最优解时满足<span class="math inline">\(f&#39;+\lambda g&#39;=0\)</span>和<span class="math inline">\(g=c\)</span>。</p>
-<h4 id="含有不等式约束">含有不等式约束</h4>
-<p>参考《统计学习方法》附录C的“<a href="https://zhuanlan.zhihu.com/p/38182879" target="_blank" rel="noopener">拉格朗日对偶性</a>”，关于原始问题和对偶问题的最优解相等的时候该最优解必须满足的KKT条件。</p>
-<p>参考等式约束情况下原始问题到对偶问题的转化，以及最优解需满足的KKT条件（包含两部分，原始问题的约束条件，以及梯度条件）。</p>
-<h4 id="对偶问题和kkt条件">对偶问题和KKT条件</h4>
-<p>猜测引入对偶问题的原因，是方便推导出KKT条件，进而通过求解KKT条件来求解原始问题。</p>
-<h2 id="共轭先验">共轭先验</h2>
-<p>在贝叶斯统计中，如果后验分布与先验分布属于同类，则先验分布与后验分布被称为共轭分布，而先验分布被称为似然函数的共轭先验。共轭先验的好处主要在于代数上的方便性，可以直接给出后验分布的封闭形式，否则的话只能数值计算。共轭先验也有助于获得关于似然函数如何更新先验分布的直观印象。</p>
+<p>## 深度学习中梯度消失，和激活函数Relu，sigmoid ，tanh的区别</p>
+<ul>
+<li>激活函数通常有以下性质：
+<ul>
+<li>非线性：如果激活函数都为线性，那么神经网络的最终输出都是和输入呈线性关系（矩阵连乘）；显然这不符合事实。</li>
+<li>可导性：神经网络的优化都是基于梯度的，求解梯度时需要确保函数可导。</li>
+<li>单调性:激活函数是单调的，否则不能保证神经网络抽象的优化问题为凸优化问题了。</li>
+<li>输出范围有限：激活函数的输出值的范围是有限时，基于梯度的方法会更加稳定。</li>
+</ul></li>
+<li>参考<a href="http://www.voidcn.com/article/p-tmaepxar-bms.html" target="_blank" rel="noopener">连接</a> 和<a href="https://zhuanlan.zhihu.com/p/38537439" target="_blank" rel="noopener">连接</a></li>
+<li>梯度牵涉到链式求导运算，每层因子相乘的结果不断减小，产生梯度消失，会造成网络的前层网络的权重的梯度很小，这些w很可能得不到更新；而如果相乘的结果越来越大，则产生梯度爆炸。sigmoid和tanh都有这个问题，而relu没有。如下解决办法:
+<ul>
+<li>1、使用relu类激活函数，他们求导过程中梯度为1，不同网络层的权重可以得到同速度的更新</li>
+<li>2、Batch normalization. 具有加速网络收敛速度，提升训练稳定性的效果，Batchnorm本质上是解决反向传播过程中的梯度问题。batchnorm全名是batch normalization，简称BN，即批规范化，通过规范化操作将输出信号x规范化保证网络的稳定性。batchnorm就是通过对每一层的输出规范为均值和方差一致的方法，消除了每层x带来的放大缩小的影响，进而解决梯度消失和爆炸的问题，或者可以理解为BN将输出从饱和区拉倒了非饱和区。</li>
+<li>3、残差网络。非常深的网络很难训练，存在梯度消失和梯度爆炸问题，学习 skip connection它可以从某一层获得激活，然后迅速反馈给另外一层甚至更深层，利用 skip connection可以构建残差网络ResNet来训练更深的网络，ResNet网络是由残差模块构建的</li>
+</ul></li>
+<li>ReLU 也有缺点，就是训练的时候很”脆弱”，很容易就”die”了。一个非常大的梯度流过一个 ReLU 神经元，更新过参数之后，这个神经元再也不会对任何数据有激活现象了。如果这个情况发生了，那么这个神经元的梯度就永远都会是0.实际操作中，如果你的learning rate 很大，那么很有可能你网络中的40%的神经元都”dead”了。 当然，如果你设置了一个合适的较小的learning rate，这个问题发生的情况其实也不会太频繁。</li>
+<li>单纯看sigmoid，它主要有以下缺点：
+<ul>
+<li>梯度消失（Gradient Vanishing） 会导致BP时，w的系数太小，w更新很慢。所以对初始化时要特别注意，避免过大的初始值使神经元进入饱和区。</li>
+<li>输出不是zero-center 这会导致后层的神经元的输入是非0均值的信号，这会对梯度产生影响：假设后层神经元的输入都为正(e.g. x&gt;0 elementwise in ),那么对w求局部梯度则都为正，这样在反向传播的过程中w要么都往正方向更新，要么都往负方向更新，导致有一种捆绑的效果，使得收敛缓慢。 如果你是按batch去训练，那么每个batch可能得到不同的符号（正或负），那么相加一下这个问题还是可以缓解</li>
+<li>指数运算耗时，计算效率低</li>
+</ul></li>
+<li>tanh和relu相比sigmoid计算效率高，但tanh和sigmoid都有梯度消失现象，而relu容易死。</li>
+</ul>
 ]]></content>
       <categories>
         <category>ML-AI</category>
@@ -2338,60 +2344,54 @@ GMM模型里是是[0,1]区间的变量（p164 <span class="math inline">\(\hat{\
       </tags>
   </entry>
   <entry>
-    <title>机器学习概念总结三分之三部</title>
-    <url>/2019/09/09/ML-AI/2019-09-09-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E4%B9%8B%E4%B8%89%E9%83%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="生成模型和判别模型">生成模型和判别模型</h2>
-<h4 id="生成模型">生成模型</h4>
+    <title>机器学习概念总结三分之二部</title>
+    <url>/2019/09/09/ML-AI/2019-09-09-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E4%B9%8B%E4%BA%8C%E9%83%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="过拟合">过拟合</h2>
+<p>随着训练过程的进行，在训练集上的错误率渐渐减小，但是在验证集上的错误率却反而渐渐增大。也就是说训练出来的网络过拟合了训练集，对训练集外的数据却不工作。</p>
+<p>过拟合是一种在项目实践中遇到的一个常见的现象，并不是一种高深的理论。“简单函数的泛化能力更好”不是一个有着坚实理论和数学基础的理论定理，它只是在长久的数据科学项目中，数据科学家们发现的一个普遍现象。可以理解为属于 经验科学 的一个范畴，简单的模型不容易产生过拟合，简单的模型泛化能力更好，甚至所谓的奥卡姆剃刀原理。这个经验在很多时候是有效的，我们也没有什幺理由不去应用这个经验。毕竟数据科学还是一个偏向实践和以结果说话的学科，得到好的结果是最重要的。</p>
+<p>过拟合的原因 （<a href="https://zhuanlan.zhihu.com/p/26122044" target="_blank" rel="noopener">大白话解释模型产生过拟合的原因</a>有具体的例子，<a href="https://flashgene.com/archives/11824.html" target="_blank" rel="noopener">浅议过拟合现象(overfitting)以及正则化技术原理</a>）： + 数据有噪声 + 训练数据不足，在有限的样本中搜索过大的模型空间 + 训练模型过度导致模型非常复杂</p>
+<p>避免过拟合的方法 （<a href="https://zhuanlan.zhihu.com/p/26122044" target="_blank" rel="noopener">大白话解释模型产生过拟合的原因</a>）：</p>
 <ul>
-<li>有朴素贝叶斯和隐形马尔科夫链。</li>
+<li>early stopping</li>
+<li>数据集扩增（Data augmentation）</li>
+<li>正则化（Regularization）包括L1、L2（L2 regularization也叫weight decay）</li>
+<li>dropout (<a href="https://www.cnblogs.com/alexanderkun/p/6922428.html" target="_blank" rel="noopener">正则化为什么能防止过拟合</a>)。</li>
+<li>最大池化层（maxpool）</li>
 </ul>
-<h4 id="判别模型">判别模型</h4>
+<p>其它：</p>
 <ul>
-<li>有感知机、k近邻、决策树、逻辑斯蒂回归和最大熵、支持向量机、提升方法、提交随机场。</li>
+<li><a href="https://www.jianshu.com/p/a9cc62db419e" target="_blank" rel="noopener">正则化为什么能防止过拟合</a> 直观地说明了在多项式拟合里，为什么过拟合的系数比较大，进而说明正则化（不管是L1还是L2都能让参数趋于小）对过拟合有用：过拟合，就是拟合函数需要顾忌每一个点，最终形成的拟合函数波动很大。在某些很小的区间里，函数值的变化很剧烈。这就意味着函数在某些小区间里的导数值（绝对值）非常大，由于自变量值可大可小，所以只有系数足够大，才能保证导数值很大。</li>
+<li>术语&quot;泛化&quot;指的是一个假设模型能够应用到新样本的能力。新样本数据是指没有出现在训练集中的数据。</li>
 </ul>
-<h2 id="损失函数">损失函数</h2>
-<h4 id="误分点到超平面距离">误分点到超平面距离</h4>
-<h4 id="对数似然损失">对数似然损失</h4>
-<h4 id="逻辑斯蒂损失">逻辑斯蒂损失</h4>
-<h4 id="合页损失">合页损失</h4>
-<h4 id="指数损失">指数损失</h4>
-<h2 id="评估结果的几个参数">评估结果的几个参数</h2>
+<h4 id="高偏差与高方差"><a href="https://www.jianshu.com/p/a585d5506b1e" target="_blank" rel="noopener">高偏差与高方差</a></h4>
 <ul>
-<li>查准率和查全率，可以根据字面理解其含义，并画出图 <a href="https://img-blog.csdn.net/20150707170145495" target="_blank" rel="noopener">连接</a> ，并结合图给出真阳率和真阴率的概念。另外，查准率和查全率分别对应精确率P和召回率R，以这样的方式来记忆准确率和召回率，不然就太难记了。</li>
-<li>然后根据精确率P和召回率R写出 <span class="math inline">\(F_1=\frac{PR}{P+R}\)</span> 的公式，以及准确率的公式<span class="math inline">\(A_{cc}=\frac{TN+TP}{ALL}\)</span>。然后给出ROC曲线的横坐标和纵坐标（分别是假阳率和真阳率），以及AUC的含义。</li>
-<li>以上面的图结合ROC来分析，横纵坐标分别是途中的判别线（虚线）左侧的两个部分分别占所在椭圆的比例，而AUC的大小可以用来作为两个椭圆映射到与水平方向上的重合度，这个重合度与模型的判别效果有关。具体的，判别效果最差的情况，二者重合，那么假阳率和真阳率的变化相同，是一条直线，AUC是0.5；最好的情况，二者完全没有重合，则是个直角，AUC是1。</li>
-<li>物体识别领域的MAP（mean average precision）的概念，以及从P到AP再到MAP的层层递进。可以参考 <a href="https://blog.csdn.net/katherine_hsr/article/details/79266880" target="_blank" rel="noopener">连接</a>
-<ul>
-<li>P是某一张图片里某个类的物体，能够检测到的个数除以该类物体的总的个数</li>
-<li>AP是对于某个类，所有照片的P值的均值</li>
-<li>MAP是AP在所有类上的均值。</li>
-</ul></li>
+<li>过拟合意味着高方差，欠拟合意味着高偏差（https://www.cnblogs.com/jianxinzhou/p/4083921.html ）</li>
+<li>偏差（bias）：我们要预测第二天的收益，而估值指标经常用于长线投资，虽然每次预测都是信誓旦旦，但是模型从本质上就把目标搞错了。</li>
+<li>方差（variance）：过多的已知条件，导致模型无法给出确定的预测，预测结果和瞎蒙一样，给人的感觉是不靠谱。</li>
+<li>无法消除的误差：我们都知道，完美预测第二天的情况，是不可能的。这样的误差难以消除，我们希望它越小越好，一般就忽略掉了。所以，我们可以优化的误差=偏差+方差 相关描述可以看一下知乎答案：<a href="https://www.zhihu.com/question/20700829/answer/119314862" target="_blank" rel="noopener">链接</a></li>
 </ul>
-<p>## 深度学习中梯度消失，和激活函数Relu，sigmoid ，tanh的区别</p>
+<h2 id="贝叶斯学派和频率学派">贝叶斯学派和频率学派</h2>
 <ul>
-<li>激活函数通常有以下性质：
-<ul>
-<li>非线性：如果激活函数都为线性，那么神经网络的最终输出都是和输入呈线性关系（矩阵连乘）；显然这不符合事实。</li>
-<li>可导性：神经网络的优化都是基于梯度的，求解梯度时需要确保函数可导。</li>
-<li>单调性:激活函数是单调的，否则不能保证神经网络抽象的优化问题为凸优化问题了。</li>
-<li>输出范围有限：激活函数的输出值的范围是有限时，基于梯度的方法会更加稳定。</li>
-</ul></li>
-<li>参考<a href="http://www.voidcn.com/article/p-tmaepxar-bms.html" target="_blank" rel="noopener">连接</a> 和<a href="https://zhuanlan.zhihu.com/p/38537439" target="_blank" rel="noopener">连接</a></li>
-<li>梯度牵涉到链式求导运算，每层因子相乘的结果不断减小，产生梯度消失，会造成网络的前层网络的权重的梯度很小，这些w很可能得不到更新；而如果相乘的结果越来越大，则产生梯度爆炸。sigmoid和tanh都有这个问题，而relu没有。如下解决办法:
-<ul>
-<li>1、使用relu类激活函数，他们求导过程中梯度为1，不同网络层的权重可以得到同速度的更新</li>
-<li>2、Batch normalization. 具有加速网络收敛速度，提升训练稳定性的效果，Batchnorm本质上是解决反向传播过程中的梯度问题。batchnorm全名是batch normalization，简称BN，即批规范化，通过规范化操作将输出信号x规范化保证网络的稳定性。batchnorm就是通过对每一层的输出规范为均值和方差一致的方法，消除了每层x带来的放大缩小的影响，进而解决梯度消失和爆炸的问题，或者可以理解为BN将输出从饱和区拉倒了非饱和区。</li>
-<li>3、残差网络。非常深的网络很难训练，存在梯度消失和梯度爆炸问题，学习 skip connection它可以从某一层获得激活，然后迅速反馈给另外一层甚至更深层，利用 skip connection可以构建残差网络ResNet来训练更深的网络，ResNet网络是由残差模块构建的</li>
-</ul></li>
-<li>ReLU 也有缺点，就是训练的时候很”脆弱”，很容易就”die”了。一个非常大的梯度流过一个 ReLU 神经元，更新过参数之后，这个神经元再也不会对任何数据有激活现象了。如果这个情况发生了，那么这个神经元的梯度就永远都会是0.实际操作中，如果你的learning rate 很大，那么很有可能你网络中的40%的神经元都”dead”了。 当然，如果你设置了一个合适的较小的learning rate，这个问题发生的情况其实也不会太频繁。</li>
-<li>单纯看sigmoid，它主要有以下缺点：
-<ul>
-<li>梯度消失（Gradient Vanishing） 会导致BP时，w的系数太小，w更新很慢。所以对初始化时要特别注意，避免过大的初始值使神经元进入饱和区。</li>
-<li>输出不是zero-center 这会导致后层的神经元的输入是非0均值的信号，这会对梯度产生影响：假设后层神经元的输入都为正(e.g. x&gt;0 elementwise in ),那么对w求局部梯度则都为正，这样在反向传播的过程中w要么都往正方向更新，要么都往负方向更新，导致有一种捆绑的效果，使得收敛缓慢。 如果你是按batch去训练，那么每个batch可能得到不同的符号（正或负），那么相加一下这个问题还是可以缓解</li>
-<li>指数运算耗时，计算效率低</li>
-</ul></li>
-<li>tanh和relu相比sigmoid计算效率高，但tanh和sigmoid都有梯度消失现象，而relu容易死。</li>
+<li>先验概率、似然函数与后验概率</li>
 </ul>
+<p>似然函数（likelihood function），也称作似然，是一个关于统计模型参数的函数。也就是这个函数中自变量是统计模型的参数。对于结果 x ，在参数集合 θ 上的似然，就是在给定这些参数值的基础上，观察到的结果的概率 <span class="math inline">\(L(θ\mid x)=P(x\mid θ)\)</span>。也就是说，似然是关于参数的函数，在参数给定的条件下，对于观察到的 x 的值的条件分布。</p>
+<p>用<span class="math inline">\((θ)\)</span>表示概率分布函数，用 <span class="math inline">\(p(x\mid θ)\)</span>表示观测值 x 的似然函数。后验概率定义为： <span class="math inline">\(p(θ\mid x)=\frac{p(x\mid θ)p(θ)}{p(x)}\)</span> 。由于分母不变，可以表达成如下正比关系： 后验概率<span class="math inline">\(p(θ\mid x)\)</span> ∝ 似然函数<span class="math inline">\(p(x\mid θ)\)</span>×先验概率p(x)</p>
+<p><a href="https://www.cnblogs.com/wjgaas/p/4523779.html" target="_blank" rel="noopener">先验概率、似然函数与后验概率</a> 最大后验概率和极大似然估计很像，只是多了一项先验分布，它体现了贝叶斯认为参数也是随机变量的观点，在实际运算中通常通过超参数给出先验分布。极大似然估计和最大后验概率都是参数的点估计。在频率学派中，参数固定了，预测值也就固定了。最大后验概率是贝叶斯学派的一种近似手段，因为完全贝叶斯估计不一定可行。另一方面，最大后验概率可以看作是对先验和MLE的一种折衷，如果数据量足够大，最大后验概率和最大似然估计趋向于一致，如果数据为0,最大后验仅由先验决定。</p>
+<p>用抛硬币的例子来依次讲解极大似然估计、最大后验概率估计和贝叶斯估计：<a href="https://blog.csdn.net/yangliuy/article/details/8296481" target="_blank" rel="noopener">链接</a></p>
+<h2 id="拉格朗日乘子法">拉格朗日乘子法</h2>
+<p>分为只含有等式约束，以及含有不等式约束两种情况。</p>
+<h4 id="只有等式约束">只有等式约束</h4>
+<p>参考 维基百科<a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E6%95%B0" target="_blank" rel="noopener">拉格朗日乘数</a>。例如如下特征，即目标函数取极值时目标函数和各个等式约束的在该极值处相切，即它们在极值处梯度方向相等或者相反，即它们的各个偏导数成比例关系。</p>
+<p>举例：<span class="math inline">\(f(x,y)\)</span>在<span class="math inline">\(g(x,y) = c\)</span>约束下的极值问题，则极值点<span class="math inline">\((x_0,y_0)\)</span>处有<span class="math inline">\(f_x+\lambda g_x = 0, f_y+\lambda g_y=0\)</span>，同时有<span class="math inline">\(g(x_0,y_0)=c\)</span>。因此就将原来的约束优化问题，转换成如下拥有三个自变量<span class="math inline">\((x,y,\lambda)\)</span>的无约束极值问题 <span class="math inline">\(f(x,y)+\lambda (g(x,y)-c)\)</span>，其中<span class="math inline">\(\lambda\)</span>任意取值。</p>
+<p>对该无约束问题进行分析，由于<span class="math inline">\(\lambda\)</span>可以任意取值，因此只能由<span class="math inline">\(g(x,y)-c=0\)</span>，另外取极值时梯度为0，即<span class="math inline">\(f&#39;+\lambda g&#39;=0\)</span>，可见于原约束优化问题是等价的。</p>
+<p>其中原约束优化问题是“原始问题”，转换后的无约束优化问题是“对偶问题”，二者最优解等价的条件就是取该最优解时满足<span class="math inline">\(f&#39;+\lambda g&#39;=0\)</span>和<span class="math inline">\(g=c\)</span>。</p>
+<h4 id="含有不等式约束">含有不等式约束</h4>
+<p>参考《统计学习方法》附录C的“<a href="https://zhuanlan.zhihu.com/p/38182879" target="_blank" rel="noopener">拉格朗日对偶性</a>”，关于原始问题和对偶问题的最优解相等的时候该最优解必须满足的KKT条件。</p>
+<p>参考等式约束情况下原始问题到对偶问题的转化，以及最优解需满足的KKT条件（包含两部分，原始问题的约束条件，以及梯度条件）。</p>
+<h4 id="对偶问题和kkt条件">对偶问题和KKT条件</h4>
+<p>猜测引入对偶问题的原因，是方便推导出KKT条件，进而通过求解KKT条件来求解原始问题。</p>
+<h2 id="共轭先验">共轭先验</h2>
+<p>在贝叶斯统计中，如果后验分布与先验分布属于同类，则先验分布与后验分布被称为共轭分布，而先验分布被称为似然函数的共轭先验。共轭先验的好处主要在于代数上的方便性，可以直接给出后验分布的封闭形式，否则的话只能数值计算。共轭先验也有助于获得关于似然函数如何更新先验分布的直观印象。</p>
 ]]></content>
       <categories>
         <category>ML-AI</category>
@@ -2551,8 +2551,8 @@ D    E     F
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>递归</tag>
         <tag>动态规划</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>

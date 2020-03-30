@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wolfbrother.github.io/2020/03/30/life/2020-03-30-%E8%80%81%E5%AE%B6%E5%81%9A%E9%A5%AD/</loc>
+    <lastmod>2020-03-30</lastmod>
+  </url>  <url>
     <loc>https://wolfbrother.github.io/2020/03/20/life/2020-03-20-%E6%98%A5%E6%97%A5%E8%8D%89%E6%9C%A8%E8%AE%B0/</loc>
-    <lastmod>2020-03-28</lastmod>
+    <lastmod>2020-03-30</lastmod>
   </url>  <url>
     <loc>https://wolfbrother.github.io/2019/09/18/tools/2019-09-18-%E9%AD%94%E6%94%B9hexo%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2020-03-20</lastmod>

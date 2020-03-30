@@ -2225,6 +2225,93 @@ GMM模型里是是[0,1]区间的变量（p164 <span class="math inline">\(\hat{\
       </tags>
   </entry>
   <entry>
+    <title>机器学习概念总结三分之一部</title>
+    <url>/2019/09/09/ML-AI/2019-09-09-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E4%B9%8B%E4%B8%80%E9%83%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="求mtimes-k的矩阵a和ntimes-k矩阵b的欧几里得距离">求<span class="math inline">\(m\times k\)</span>的矩阵<span class="math inline">\(A\)</span>和<span class="math inline">\(n\times k\)</span>矩阵<span class="math inline">\(B\)</span>的欧几里得距离。</h2>
+<p>说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个<span class="math inline">\(m\times n\)</span>维矩阵D， 其中<span class="math inline">\(D_{ij}\)</span>表示<span class="math inline">\(A_i\)</span>和<span class="math inline">\(D_j\)</span>的欧几里得距离。</p>
+<p>分析：<span class="math inline">\(D^2_{ij} = \mid\mid A_i-B_j\mid\mid ^2 = A^2_i-2A_iB^T_j+B^2_i= A_iA^T_i-2A_iB^T_j+B_jB^T_j\)</span>，其中有<span class="math inline">\(i&lt;m, j&lt;n\)</span>。</p>
+<p>对于A，首先计算m个横向量的模的平方，得到m维列向量，然后复制n份，得到<span class="math inline">\(m\times n\)</span>的矩阵；</p>
+<p>对于B，计算n个横向量的模的平放，得到n维列两向量，然后复制m份，得到的矩阵进行转置，得到<span class="math inline">\(m\times n\)</span>的矩阵；</p>
+<p>对于<span class="math inline">\(A\times B^T\)</span>，直接带入计算即可。</p>
+<p>将三个矩阵带入计算就行。</p>
+<h2 id="梯度与方向导数">梯度与方向导数</h2>
+<p>一元函数的导数:<span class="math inline">\(f&#39;(x) = \lim_{\Delta x\rightarrow 0}\frac{f(x+\Delta x)-f(x)}{\Delta x}\)</span></p>
+<p>多元函数有偏导数，对f(x,y)，有<span class="math inline">\(f_x(x,y) = \lim_{\Delta x}\frac{f(x+ \Delta x,y)-f(x,y)}{\Delta x}\)</span>，表示y不变时，沿x轴的变化率。同理可定义<span class="math inline">\(f_y(x,y)\)</span>。</p>
+<p>方向导数：多元函数是一个平面，方向有很多， 而<span class="math inline">\(f_x(x,y)\)</span>的x 轴和<span class="math inline">\(f_y(x,y)\)</span>的y 轴只是其中两个方向的变化率而已。方向导数可以表示任意方向变化率。 对于方向<span class="math inline">\(u=cos\theta i + sin \theta j\)</span>，有 <span class="math display">\[\lim_{\Delta t}\frac{f(x+ cos\theta\Delta t, y+ sin\theta\Delta t)-f(x,y)}{\Delta t} = f_x(x,y)cos\theta + f_y(x,y)sin\theta\]</span> 可以看出，增量是向量<span class="math inline">\((f_x,f_y)\)</span>与方向<span class="math inline">\(u\)</span>的单位向量的向量积。想要增量最大，则只能让方向与向量<span class="math inline">\((f_x,f_y)\)</span>保持一致，而后者又叫做梯度。</p>
+<h4 id="批量梯度下降bgd随机梯度下降sgd小批量梯度下降mbgd">批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD</h4>
+<ul>
+<li>BGD：每次在更新参数时使用所有的样本；</li>
+<li>SGD：每次更新参数时采用随机抽样的单个样本；</li>
+<li>MBGD:BGD和SGD这两种极端方案的折中。</li>
+</ul>
+<h4 id="sgdmomentumadagardadam">SGD,Momentum,Adagard,Adam</h4>
+<ul>
+<li>总结
+<ul>
+<li>一阶动量（梯度）衰减方案利于全局搜索，</li>
+<li>二阶动量（梯度的平方）衰减方案使得学习率自动调整，之所以要衰减是为了防止梯度消失</li>
+<li>求梯度时用到前瞻性预估</li>
+</ul></li>
+<li>牛客网上的总结： <a href="https://www.nowcoder.com/tutorial/95/a785d36cf4264dfa93c3de133d0bb339" target="_blank" rel="noopener">链接</a></li>
+<li>对这几个优化方法的介绍比较全面： <a href="https://fengxc.me/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95.html" target="_blank" rel="noopener">链接</a></li>
+<li>各个优化方法的优缺点总结的比较好：<a href="https://www.cnblogs.com/GeekDanny/p/9655597.html" target="_blank" rel="noopener">链接</a></li>
+<li>这个写得更完善： <a href="https://www.jianshu.com/p/aebcaf8af76e" target="_blank" rel="noopener">链接</a></li>
+<li>最生动的解释，讲了各个方法的关系： <a href="https://www.bilibili.com/video/av16001891/?p=18" target="_blank" rel="noopener">链接</a>
+<ul>
+<li>Momentum和AdaGrad的组合</li>
+</ul></li>
+<li>这儿总结的也不错 从 SGD 到 Adam —— 6大常见优化算法总结 - zhahzhi的文章 - 知乎<a href="https://zhuanlan.zhihu.com/p/64113429" target="_blank" rel="noopener">链接</a></li>
+</ul>
+<h2 id="海森矩阵与牛顿法">海森矩阵与牛顿法</h2>
+<p>二阶可微函数<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(x_0\)</span>处的二阶展开式 <span class="math display">\[f(x) = f(x_0)+g_0^T(x-x_0)+\frac1{2}(x-x_0)^TH_0(x-x_0)+o^n\]</span> 其中<span class="math inline">\(x,x_0\)</span>都是向量, <span class="math inline">\(g_0\)</span>是<span class="math inline">\(x_0\)</span>处的梯度向量，<span class="math inline">\(H_0\)</span>是<span class="math inline">\(x_)\)</span>处的海森矩阵。</p>
+<ul>
+<li>当<span class="math inline">\(x_0\)</span>处梯度<span class="math inline">\(g_0=0\)</span>且海森矩阵<span class="math inline">\(H_0\)</span>是正定矩阵时，<span class="math inline">\(x_0\)</span>为极小值。</li>
+</ul>
+<p>证明：正定矩阵<span class="math inline">\(H_0\)</span>必满足对任意非零向量<span class="math inline">\(x\)</span>有<span class="math inline">\(x^TH_0x&gt;0\)</span>。那么对于<span class="math inline">\(\triangle x\)</span>有<span class="math inline">\(f(x_0+\triangle x)&gt;f(x_0)\)</span>。</p>
+<ul>
+<li>牛顿法的迭代公式</li>
+</ul>
+<p>说明：由极小值的必要条件，对<span class="math inline">\(f(x)\)</span>进行求导并且令倒数为0，有<span class="math inline">\(g_0+H_0(x-x_0)=0\)</span>。 得到<span class="math inline">\(x = x_0-\frac{g_0}{H_0}\)</span>，将其作为迭代公式。</p>
+<ul>
+<li>牛顿法的缺点</li>
+</ul>
+<p>有两个：1.计算海森矩阵的逆矩阵的计算量比较大；2.海森矩阵的存储空间需求比较大</p>
+<p>因此需要拟牛顿法，思路是找一个矩阵来近似海森矩阵的逆矩阵。</p>
+<p>牛顿法为什么收敛快：牛顿法是二阶收敛，梯度下降是一阶收敛，所以牛顿法就更快。如果更通俗地说的话，比如你想找一条最短的路径走到一个盆地的最底部，梯度下降法每次只从你当前所处位置选一个坡度最大的方向走一步，牛顿法在选择方向时，不仅会考虑坡度是否够大，还会考虑你走了一步之后，坡度是否会变得更大。所以，可以说牛顿法比梯度下降法看得更远一点，能更快地走到最底部。</p>
+<p>参考：</p>
+<ul>
+<li>梯度下降法、牛顿法和拟牛顿法 <a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">链接</a></li>
+<li>最优化问题中，牛顿法为什么比梯度下降法求解需要的迭代次数更少？ <a href="https://www.zhihu.com/question/19723347/answer/14636244" target="_blank" rel="noopener">链接</a></li>
+</ul>
+<h2 id="线性回归和局部加权线性回归">线性回归和局部加权线性回归</h2>
+<ul>
+<li>二者的基本公式可参考我的博客“LR vs LWLR”：<a href="https://wolfbrother.blog.csdn.net/article/details/46778039" target="_blank" rel="noopener">链接</a>，注意那张插图所说明的LWLR的应用场景的例子。</li>
+<li>贝叶斯框架推到线性回归公式，关于先验、后验、似然函数、贝叶斯公式：<a href="https://zhuanlan.zhihu.com/p/44809220" target="_blank" rel="noopener">链接</a></li>
+<li>线性回归是局部加权线性回归的特殊形式，具体的加权矩阵是单位矩阵，某个样本的损失函数就是其本身的损失函数值。而局部加权线性回归里，一个样本的损失函数，是与其它所有的样本（包括其自身）的损失函数值的乘积的加权和。当计算一个新的样本值的输出值<span class="math inline">\(y\)</span>时，首先计算其损失函数（是一个关于<span class="math inline">\(y\)</span>的二次函数），然后求解<span class="math inline">\(y\)</span>。</li>
+</ul>
+<h2 id="l2和l1正则化">L2和L1正则化</h2>
+<ul>
+<li>参考：<a href="https://blog.csdn.net/golden1314521/article/details/46778369" target="_blank" rel="noopener">链接</a></li>
+<li>L2正则化又叫岭回归，有解析解。岭回归是一种专用于共线性数据分析的有偏估计回归方法，实质上是一种改良的最小二乘估计法，通过放弃最小二乘法的无偏性，以损失部分信息、降低精度为代价获得回归系数更为符合实际、更可靠的回归方法，对病态数据的拟合要强于普通最小二乘法。那么什么样得数据算是病态数据，主要有两种，一种是数据点少于变量数（特征维数），这种情况下特征信息矩阵维数无法求逆，不满足最小二乘得条件；第二种是自变量中的某几个存在多重共线性，对于这样得数据虽然可得到无偏解，但是却有可能和实际情况相差甚远（<a href="https://lidongxuan.github.io/blog/regression" target="_blank" rel="noopener">链接</a> 和 <a href="https://www.zhihu.com/question/28221429/answer/53858036" target="_blank" rel="noopener">链接</a> ）。</li>
+<li><p>L1正则化的lasso算法思想：每次迭代中，依次对权值向量的每个值，增大或者减小一个小量（就像梯度下降算法里对自变量的改变一样）同时权值向量的其他值保持不变，计算函数值；对每次迭代里，函数值最优的那个改变（包括权值的位置，该变量的方向）作为本次迭代的改进（参见牛客网的 <a href="https://www.nowcoder.com/tutorial/95/a785d36cf4264dfa93c3de133d0bb339" target="_blank" rel="noopener">链接</a> 所提到的坐标轴下降法）。</p></li>
+<li><p><a href="https://www.zhihu.com/question/23536142/answer/90135994" target="_blank" rel="noopener">LR正则化与数据先验分布的关系？</a> 从贝叶斯的角度来看, 正则化等价于对模型参数引入先验分布, L2相当于参数向量的高斯先验分布，L1X相当于参数向量的拉普拉斯先验分布。</p></li>
+</ul>
+<h4 id="二者特点">二者特点</h4>
+<ul>
+<li>都能让参数向量值变小 （<a href="https://www.cnblogs.com/alexanderkun/p/6922428.html" target="_blank" rel="noopener">正则化为什么能防止过拟合</a>）。</li>
+<li>L2 并不具有产生稀疏解的能力，也就是说参数并不会真出现很多零。假设我们的预测结果与两个特征相关，L2正则倾向于综合两者的影响，给影响大的特征赋予高的权重；</li>
+<li>而 L1 正则倾向于选择影响较大的参数，而舍弃掉影响较小的那个；</li>
+<li>实际应用中 L2正则表现往往会优于 L1正则，但 L1正则会大大降低我们的 计算量（因为参数少吧）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>ML-AI</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>机器学习概念总结三分之二部</title>
     <url>/2019/09/09/ML-AI/2019-09-09-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E4%B9%8B%E4%BA%8C%E9%83%A8/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="过拟合">过拟合</h2>
@@ -2335,93 +2422,6 @@ GMM模型里是是[0,1]区间的变量（p164 <span class="math inline">\(\hat{\
 <li>指数运算耗时，计算效率低</li>
 </ul></li>
 <li>tanh和relu相比sigmoid计算效率高，但tanh和sigmoid都有梯度消失现象，而relu容易死。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>ML-AI</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>机器学习概念总结三分之一部</title>
-    <url>/2019/09/09/ML-AI/2019-09-09-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%E4%B8%89%E5%88%86%E4%B9%8B%E4%B8%80%E9%83%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="求mtimes-k的矩阵a和ntimes-k矩阵b的欧几里得距离">求<span class="math inline">\(m\times k\)</span>的矩阵<span class="math inline">\(A\)</span>和<span class="math inline">\(n\times k\)</span>矩阵<span class="math inline">\(B\)</span>的欧几里得距离。</h2>
-<p>说明：认为样本是k维横向量，矩阵A和B分别包含m和n个样本。那么，A和B的欧几里得距离，就是A的m个样本和B的n个样本的距离的集合，是个<span class="math inline">\(m\times n\)</span>维矩阵D， 其中<span class="math inline">\(D_{ij}\)</span>表示<span class="math inline">\(A_i\)</span>和<span class="math inline">\(D_j\)</span>的欧几里得距离。</p>
-<p>分析：<span class="math inline">\(D^2_{ij} = \mid\mid A_i-B_j\mid\mid ^2 = A^2_i-2A_iB^T_j+B^2_i= A_iA^T_i-2A_iB^T_j+B_jB^T_j\)</span>，其中有<span class="math inline">\(i&lt;m, j&lt;n\)</span>。</p>
-<p>对于A，首先计算m个横向量的模的平方，得到m维列向量，然后复制n份，得到<span class="math inline">\(m\times n\)</span>的矩阵；</p>
-<p>对于B，计算n个横向量的模的平放，得到n维列两向量，然后复制m份，得到的矩阵进行转置，得到<span class="math inline">\(m\times n\)</span>的矩阵；</p>
-<p>对于<span class="math inline">\(A\times B^T\)</span>，直接带入计算即可。</p>
-<p>将三个矩阵带入计算就行。</p>
-<h2 id="梯度与方向导数">梯度与方向导数</h2>
-<p>一元函数的导数:<span class="math inline">\(f&#39;(x) = \lim_{\Delta x\rightarrow 0}\frac{f(x+\Delta x)-f(x)}{\Delta x}\)</span></p>
-<p>多元函数有偏导数，对f(x,y)，有<span class="math inline">\(f_x(x,y) = \lim_{\Delta x}\frac{f(x+ \Delta x,y)-f(x,y)}{\Delta x}\)</span>，表示y不变时，沿x轴的变化率。同理可定义<span class="math inline">\(f_y(x,y)\)</span>。</p>
-<p>方向导数：多元函数是一个平面，方向有很多， 而<span class="math inline">\(f_x(x,y)\)</span>的x 轴和<span class="math inline">\(f_y(x,y)\)</span>的y 轴只是其中两个方向的变化率而已。方向导数可以表示任意方向变化率。 对于方向<span class="math inline">\(u=cos\theta i + sin \theta j\)</span>，有 <span class="math display">\[\lim_{\Delta t}\frac{f(x+ cos\theta\Delta t, y+ sin\theta\Delta t)-f(x,y)}{\Delta t} = f_x(x,y)cos\theta + f_y(x,y)sin\theta\]</span> 可以看出，增量是向量<span class="math inline">\((f_x,f_y)\)</span>与方向<span class="math inline">\(u\)</span>的单位向量的向量积。想要增量最大，则只能让方向与向量<span class="math inline">\((f_x,f_y)\)</span>保持一致，而后者又叫做梯度。</p>
-<h4 id="批量梯度下降bgd随机梯度下降sgd小批量梯度下降mbgd">批量梯度下降BGD，随机梯度下降SGD，小批量梯度下降MBGD</h4>
-<ul>
-<li>BGD：每次在更新参数时使用所有的样本；</li>
-<li>SGD：每次更新参数时采用随机抽样的单个样本；</li>
-<li>MBGD:BGD和SGD这两种极端方案的折中。</li>
-</ul>
-<h4 id="sgdmomentumadagardadam">SGD,Momentum,Adagard,Adam</h4>
-<ul>
-<li>总结
-<ul>
-<li>一阶动量（梯度）衰减方案利于全局搜索，</li>
-<li>二阶动量（梯度的平方）衰减方案使得学习率自动调整，之所以要衰减是为了防止梯度消失</li>
-<li>求梯度时用到前瞻性预估</li>
-</ul></li>
-<li>牛客网上的总结： <a href="https://www.nowcoder.com/tutorial/95/a785d36cf4264dfa93c3de133d0bb339" target="_blank" rel="noopener">链接</a></li>
-<li>对这几个优化方法的介绍比较全面： <a href="https://fengxc.me/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95.html" target="_blank" rel="noopener">链接</a></li>
-<li>各个优化方法的优缺点总结的比较好：<a href="https://www.cnblogs.com/GeekDanny/p/9655597.html" target="_blank" rel="noopener">链接</a></li>
-<li>这个写得更完善： <a href="https://www.jianshu.com/p/aebcaf8af76e" target="_blank" rel="noopener">链接</a></li>
-<li>最生动的解释，讲了各个方法的关系： <a href="https://www.bilibili.com/video/av16001891/?p=18" target="_blank" rel="noopener">链接</a>
-<ul>
-<li>Momentum和AdaGrad的组合</li>
-</ul></li>
-<li>这儿总结的也不错 从 SGD 到 Adam —— 6大常见优化算法总结 - zhahzhi的文章 - 知乎<a href="https://zhuanlan.zhihu.com/p/64113429" target="_blank" rel="noopener">链接</a></li>
-</ul>
-<h2 id="海森矩阵与牛顿法">海森矩阵与牛顿法</h2>
-<p>二阶可微函数<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(x_0\)</span>处的二阶展开式 <span class="math display">\[f(x) = f(x_0)+g_0^T(x-x_0)+\frac1{2}(x-x_0)^TH_0(x-x_0)+o^n\]</span> 其中<span class="math inline">\(x,x_0\)</span>都是向量, <span class="math inline">\(g_0\)</span>是<span class="math inline">\(x_0\)</span>处的梯度向量，<span class="math inline">\(H_0\)</span>是<span class="math inline">\(x_)\)</span>处的海森矩阵。</p>
-<ul>
-<li>当<span class="math inline">\(x_0\)</span>处梯度<span class="math inline">\(g_0=0\)</span>且海森矩阵<span class="math inline">\(H_0\)</span>是正定矩阵时，<span class="math inline">\(x_0\)</span>为极小值。</li>
-</ul>
-<p>证明：正定矩阵<span class="math inline">\(H_0\)</span>必满足对任意非零向量<span class="math inline">\(x\)</span>有<span class="math inline">\(x^TH_0x&gt;0\)</span>。那么对于<span class="math inline">\(\triangle x\)</span>有<span class="math inline">\(f(x_0+\triangle x)&gt;f(x_0)\)</span>。</p>
-<ul>
-<li>牛顿法的迭代公式</li>
-</ul>
-<p>说明：由极小值的必要条件，对<span class="math inline">\(f(x)\)</span>进行求导并且令倒数为0，有<span class="math inline">\(g_0+H_0(x-x_0)=0\)</span>。 得到<span class="math inline">\(x = x_0-\frac{g_0}{H_0}\)</span>，将其作为迭代公式。</p>
-<ul>
-<li>牛顿法的缺点</li>
-</ul>
-<p>有两个：1.计算海森矩阵的逆矩阵的计算量比较大；2.海森矩阵的存储空间需求比较大</p>
-<p>因此需要拟牛顿法，思路是找一个矩阵来近似海森矩阵的逆矩阵。</p>
-<p>牛顿法为什么收敛快：牛顿法是二阶收敛，梯度下降是一阶收敛，所以牛顿法就更快。如果更通俗地说的话，比如你想找一条最短的路径走到一个盆地的最底部，梯度下降法每次只从你当前所处位置选一个坡度最大的方向走一步，牛顿法在选择方向时，不仅会考虑坡度是否够大，还会考虑你走了一步之后，坡度是否会变得更大。所以，可以说牛顿法比梯度下降法看得更远一点，能更快地走到最底部。</p>
-<p>参考：</p>
-<ul>
-<li>梯度下降法、牛顿法和拟牛顿法 <a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">链接</a></li>
-<li>最优化问题中，牛顿法为什么比梯度下降法求解需要的迭代次数更少？ <a href="https://www.zhihu.com/question/19723347/answer/14636244" target="_blank" rel="noopener">链接</a></li>
-</ul>
-<h2 id="线性回归和局部加权线性回归">线性回归和局部加权线性回归</h2>
-<ul>
-<li>二者的基本公式可参考我的博客“LR vs LWLR”：<a href="https://wolfbrother.blog.csdn.net/article/details/46778039" target="_blank" rel="noopener">链接</a>，注意那张插图所说明的LWLR的应用场景的例子。</li>
-<li>贝叶斯框架推到线性回归公式，关于先验、后验、似然函数、贝叶斯公式：<a href="https://zhuanlan.zhihu.com/p/44809220" target="_blank" rel="noopener">链接</a></li>
-<li>线性回归是局部加权线性回归的特殊形式，具体的加权矩阵是单位矩阵，某个样本的损失函数就是其本身的损失函数值。而局部加权线性回归里，一个样本的损失函数，是与其它所有的样本（包括其自身）的损失函数值的乘积的加权和。当计算一个新的样本值的输出值<span class="math inline">\(y\)</span>时，首先计算其损失函数（是一个关于<span class="math inline">\(y\)</span>的二次函数），然后求解<span class="math inline">\(y\)</span>。</li>
-</ul>
-<h2 id="l2和l1正则化">L2和L1正则化</h2>
-<ul>
-<li>参考：<a href="https://blog.csdn.net/golden1314521/article/details/46778369" target="_blank" rel="noopener">链接</a></li>
-<li>L2正则化又叫岭回归，有解析解。岭回归是一种专用于共线性数据分析的有偏估计回归方法，实质上是一种改良的最小二乘估计法，通过放弃最小二乘法的无偏性，以损失部分信息、降低精度为代价获得回归系数更为符合实际、更可靠的回归方法，对病态数据的拟合要强于普通最小二乘法。那么什么样得数据算是病态数据，主要有两种，一种是数据点少于变量数（特征维数），这种情况下特征信息矩阵维数无法求逆，不满足最小二乘得条件；第二种是自变量中的某几个存在多重共线性，对于这样得数据虽然可得到无偏解，但是却有可能和实际情况相差甚远（<a href="https://lidongxuan.github.io/blog/regression" target="_blank" rel="noopener">链接</a> 和 <a href="https://www.zhihu.com/question/28221429/answer/53858036" target="_blank" rel="noopener">链接</a> ）。</li>
-<li><p>L1正则化的lasso算法思想：每次迭代中，依次对权值向量的每个值，增大或者减小一个小量（就像梯度下降算法里对自变量的改变一样）同时权值向量的其他值保持不变，计算函数值；对每次迭代里，函数值最优的那个改变（包括权值的位置，该变量的方向）作为本次迭代的改进（参见牛客网的 <a href="https://www.nowcoder.com/tutorial/95/a785d36cf4264dfa93c3de133d0bb339" target="_blank" rel="noopener">链接</a> 所提到的坐标轴下降法）。</p></li>
-<li><p><a href="https://www.zhihu.com/question/23536142/answer/90135994" target="_blank" rel="noopener">LR正则化与数据先验分布的关系？</a> 从贝叶斯的角度来看, 正则化等价于对模型参数引入先验分布, L2相当于参数向量的高斯先验分布，L1X相当于参数向量的拉普拉斯先验分布。</p></li>
-</ul>
-<h4 id="二者特点">二者特点</h4>
-<ul>
-<li>都能让参数向量值变小 （<a href="https://www.cnblogs.com/alexanderkun/p/6922428.html" target="_blank" rel="noopener">正则化为什么能防止过拟合</a>）。</li>
-<li>L2 并不具有产生稀疏解的能力，也就是说参数并不会真出现很多零。假设我们的预测结果与两个特征相关，L2正则倾向于综合两者的影响，给影响大的特征赋予高的权重；</li>
-<li>而 L1 正则倾向于选择影响较大的参数，而舍弃掉影响较小的那个；</li>
-<li>实际应用中 L2正则表现往往会优于 L1正则，但 L1正则会大大降低我们的 计算量（因为参数少吧）</li>
 </ul>
 ]]></content>
       <categories>

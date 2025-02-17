@@ -135,3 +135,6 @@ index2_generator:
     - category 工具箱 # 不包含分类为hide的文章
     - category 小雕虫
 
+plugins:
+  - hexo-generator-cname
+

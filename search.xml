@@ -355,6 +355,10 @@ ERR! request to xxxx failed, reason: certificate has expired</h3>
 <p>翻页按钮不正常显示，显示为 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;/i&gt;</span><br></pre></td></tr></table></figure>
 解决方法是在themes/next/layout/partials下找到翻页组件pagination.swig，将
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prev_text: &#x27;&lt;i class=&quot;fa fa-angle-left&quot;&gt;&lt;/i&gt;&#x27;,</span><br><span class="line">next_text: &#x27;&lt;i class=&quot;fa fa-angle-right&quot;&gt;&lt;/i&gt;&#x27;,</span><br></pre></td></tr></table></figure> 修改成 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prev_text: &#x27;&lt;&#x27;,</span><br><span class="line">next_text: &#x27;&gt;&#x27;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="去掉评论模块">去掉评论模块</h3>
+<p>评论模块非必须，且可能失效，导致无法评论，故去掉该功能。
+涉及文件themes/next/layout/_partials/comments.swig，修改点如下：
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   &#123;% elseif theme.valine.appid and theme.valine.appkey %&#125;</span><br><span class="line">-    &lt;div class=&quot;comments&quot; id=&quot;comments&quot;&gt;</span><br><span class="line">-    &lt;/div&gt;</span><br><span class="line">   &#123;% endif %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 即删除comments组件。</p>
 ]]></content>
       <categories>
         <category>工具箱</category>
@@ -362,6 +366,53 @@ ERR! request to xxxx failed, reason: certificate has expired</h3>
       <tags>
         <tag>hexo</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>剑指59-按之字形顺序打印二叉树</title>
+    <url>/2019/09/13/algs/arrow4Offer/2019-09-13-59-%E6%8C%89%E4%B9%8B%E5%AD%97%E5%BD%A2%E9%A1%BA%E5%BA%8F%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>题目描述</p>
+<p>请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。</p>
+<ul>
+<li>用队列nodeQ来临时存储节点，进而访问其子节点。</li>
+<li>队列里两层之间有个要有个标记<code>|</code>，层的奇偶性也要有一个标记issOdd。
+<ul>
+<li>访问到该标记时，在队列末尾添加该标记。</li>
+</ul></li>
+<li>要有个缓存nodeLayer来存放同一层访问到的节点值，该层结束时根据奇偶标记来选择输出顺序。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">levelrootSnake</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="comment"># 用队列存储节点，每层末尾做一个标志，这里以符号&#x27;n&#x27;来表示。</span></span><br><span class="line">    <span class="comment"># 访问末尾节点之后，必然产生新的末尾标志。</span></span><br><span class="line">    isOdd = <span class="literal">True</span></span><br><span class="line">    myqueue = [root, <span class="string">&#x27;n&#x27;</span>]</span><br><span class="line">    mylist, nodes_layer = [], []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span>:</span><br><span class="line">        node = myqueue.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> node != <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">            nodes_layer.append(node.val)</span><br><span class="line">            <span class="keyword">if</span> node.left <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                myqueue.append(node.left)</span><br><span class="line">            <span class="keyword">if</span> node.right <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                myqueue.append(node.right)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span> <span class="keyword">and</span> myqueue[<span class="number">0</span>] == <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> isOdd == <span class="literal">True</span>:</span><br><span class="line">                mylist.append(nodes_layer[::])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                mylist.append(nodes_layer[::-<span class="number">1</span>])</span><br><span class="line">            isOdd = <span class="keyword">not</span> isOdd</span><br><span class="line">            nodes_layer = []</span><br><span class="line">            myqueue.pop(<span class="number">0</span>)</span><br><span class="line">            myqueue.append(<span class="string">&#x27;n&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> mylist</span><br></pre></td></tr></table></figure>
+<hr />
+<p>相对于前一个代码用一个数据结构来存储各层的节点，需要两个辅助数据：</p>
+<ul>
+<li>对层数是奇、偶，做标记。</li>
+<li>两层的分割点，要做标记</li>
+</ul>
+<p>想到用两个数据结构来分别存储奇数、偶数层的节点，每个循环内依次对两个数据结构进行处理，不必追踪层数和层间隔。</p>
+<ul>
+<li>注意这两个数据结构可以用队列，也可以用栈，其实区别不大。比如前面的代码用数组，后面的代码用栈。</li>
+<li>如下代码用的是栈，注意第一个栈先压入左节点，第二个栈先压入右节点。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="comment"># 返回二维列表[[1,2],[4,5]]</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">Print</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        st1, st2 = [root], []</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(st1) &gt; <span class="number">0</span>:</span><br><span class="line">            temp = []</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(st1) &gt; <span class="number">0</span>:</span><br><span class="line">                node = st1.pop(-<span class="number">1</span>)</span><br><span class="line">                temp.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    st2.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    st2.append(node.right)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(temp) &gt; <span class="number">0</span>:</span><br><span class="line">                res.append(temp[::])</span><br><span class="line">            temp = []</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(st2) &gt; <span class="number">0</span>:</span><br><span class="line">                node = st2.pop(-<span class="number">1</span>)</span><br><span class="line">                temp.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    st1.append(node.right)</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    st1.append(node.left)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(temp) &gt; <span class="number">0</span>:</span><br><span class="line">                res.append(temp[::])</span><br><span class="line">        <span class="keyword">return</span> res </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>剑指60-把二叉树打印成多行</title>
+    <url>/2019/09/13/algs/arrow4Offer/2019-09-13-60-%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E6%89%93%E5%8D%B0%E6%88%90%E5%A4%9A%E8%A1%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>题目描述</p>
+<p>从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。</p>
+<hr />
+<ul>
+<li>用队列存储节点，每层末尾做一个标志，这里以符号'n'来表示。</li>
+<li>访问末尾节点之后，必然产生新的末尾标志。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="comment"># 返回二维列表[[1,2],[4,5]]</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">Print</span>(<span class="params">self, pRoot</span>):</span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="comment"># 用队列存储节点，每层末尾做一个标志，这里以符号&#x27;n&#x27;来表示。</span></span><br><span class="line">        <span class="comment"># 访问末尾节点之后，必然产生新的末尾标志。</span></span><br><span class="line">        myqueue = [pRoot, <span class="string">&#x27;n&#x27;</span>]</span><br><span class="line">        mylist = []</span><br><span class="line">        s_layer = []</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span>:</span><br><span class="line">            node = myqueue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> node != <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">                s_layer.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.left <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    myqueue.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    myqueue.append(node.right)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span> <span class="keyword">and</span> myqueue[<span class="number">0</span>] == <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">                mylist.append(s_layer[::])</span><br><span class="line">                s_layer = []</span><br><span class="line">                myqueue.pop(<span class="number">0</span>)</span><br><span class="line">                myqueue.append(<span class="string">&#x27;n&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> mylist</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
   </entry>
   <entry>
     <title>剑指35-数组中的逆序对</title>
@@ -1044,53 +1095,6 @@ class="math inline">\(p_y\)</span>匹配一个或多个字符。特殊的，有<
 <li>递归</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSymmetrical</span>(<span class="params">self, pRoot</span>):</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">is_same</span>(<span class="params">p1,p2</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> p1 <span class="keyword">and</span> <span class="keyword">not</span> p2:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> p1 <span class="keyword">and</span> p2 <span class="keyword">and</span> p1.val==p2.val:</span><br><span class="line">                <span class="keyword">return</span> is_same(p1.left, p2.right) <span class="keyword">and</span> is_same(p1.right, p2.left)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span> <span class="keyword">if</span> <span class="keyword">not</span> pRoot <span class="keyword">else</span> is_same(pRoot.left,pRoot.right)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>剑指offer</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>剑指59-按之字形顺序打印二叉树</title>
-    <url>/2019/09/13/algs/arrow4Offer/2019-09-13-59-%E6%8C%89%E4%B9%8B%E5%AD%97%E5%BD%A2%E9%A1%BA%E5%BA%8F%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>题目描述</p>
-<p>请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。</p>
-<ul>
-<li>用队列nodeQ来临时存储节点，进而访问其子节点。</li>
-<li>队列里两层之间有个要有个标记<code>|</code>，层的奇偶性也要有一个标记issOdd。
-<ul>
-<li>访问到该标记时，在队列末尾添加该标记。</li>
-</ul></li>
-<li>要有个缓存nodeLayer来存放同一层访问到的节点值，该层结束时根据奇偶标记来选择输出顺序。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">levelrootSnake</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="comment"># 用队列存储节点，每层末尾做一个标志，这里以符号&#x27;n&#x27;来表示。</span></span><br><span class="line">    <span class="comment"># 访问末尾节点之后，必然产生新的末尾标志。</span></span><br><span class="line">    isOdd = <span class="literal">True</span></span><br><span class="line">    myqueue = [root, <span class="string">&#x27;n&#x27;</span>]</span><br><span class="line">    mylist, nodes_layer = [], []</span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span>:</span><br><span class="line">        node = myqueue.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> node != <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">            nodes_layer.append(node.val)</span><br><span class="line">            <span class="keyword">if</span> node.left <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                myqueue.append(node.left)</span><br><span class="line">            <span class="keyword">if</span> node.right <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                myqueue.append(node.right)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span> <span class="keyword">and</span> myqueue[<span class="number">0</span>] == <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> isOdd == <span class="literal">True</span>:</span><br><span class="line">                mylist.append(nodes_layer[::])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                mylist.append(nodes_layer[::-<span class="number">1</span>])</span><br><span class="line">            isOdd = <span class="keyword">not</span> isOdd</span><br><span class="line">            nodes_layer = []</span><br><span class="line">            myqueue.pop(<span class="number">0</span>)</span><br><span class="line">            myqueue.append(<span class="string">&#x27;n&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> mylist</span><br></pre></td></tr></table></figure>
-<hr />
-<p>相对于前一个代码用一个数据结构来存储各层的节点，需要两个辅助数据：</p>
-<ul>
-<li>对层数是奇、偶，做标记。</li>
-<li>两层的分割点，要做标记</li>
-</ul>
-<p>想到用两个数据结构来分别存储奇数、偶数层的节点，每个循环内依次对两个数据结构进行处理，不必追踪层数和层间隔。</p>
-<ul>
-<li>注意这两个数据结构可以用队列，也可以用栈，其实区别不大。比如前面的代码用数组，后面的代码用栈。</li>
-<li>如下代码用的是栈，注意第一个栈先压入左节点，第二个栈先压入右节点。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="comment"># 返回二维列表[[1,2],[4,5]]</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">Print</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        st1, st2 = [root], []</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(st1) &gt; <span class="number">0</span>:</span><br><span class="line">            temp = []</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(st1) &gt; <span class="number">0</span>:</span><br><span class="line">                node = st1.pop(-<span class="number">1</span>)</span><br><span class="line">                temp.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    st2.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    st2.append(node.right)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(temp) &gt; <span class="number">0</span>:</span><br><span class="line">                res.append(temp[::])</span><br><span class="line">            temp = []</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(st2) &gt; <span class="number">0</span>:</span><br><span class="line">                node = st2.pop(-<span class="number">1</span>)</span><br><span class="line">                temp.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    st1.append(node.right)</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    st1.append(node.left)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(temp) &gt; <span class="number">0</span>:</span><br><span class="line">                res.append(temp[::])</span><br><span class="line">        <span class="keyword">return</span> res </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>剑指offer</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>剑指60-把二叉树打印成多行</title>
-    <url>/2019/09/13/algs/arrow4Offer/2019-09-13-60-%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E6%89%93%E5%8D%B0%E6%88%90%E5%A4%9A%E8%A1%8C/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>题目描述</p>
-<p>从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。</p>
-<hr />
-<ul>
-<li>用队列存储节点，每层末尾做一个标志，这里以符号'n'来表示。</li>
-<li>访问末尾节点之后，必然产生新的末尾标志。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="comment"># 返回二维列表[[1,2],[4,5]]</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">Print</span>(<span class="params">self, pRoot</span>):</span><br><span class="line">        <span class="keyword">if</span> pRoot <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="comment"># 用队列存储节点，每层末尾做一个标志，这里以符号&#x27;n&#x27;来表示。</span></span><br><span class="line">        <span class="comment"># 访问末尾节点之后，必然产生新的末尾标志。</span></span><br><span class="line">        myqueue = [pRoot, <span class="string">&#x27;n&#x27;</span>]</span><br><span class="line">        mylist = []</span><br><span class="line">        s_layer = []</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span>:</span><br><span class="line">            node = myqueue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> node != <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">                s_layer.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.left <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    myqueue.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    myqueue.append(node.right)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(myqueue) != <span class="number">0</span> <span class="keyword">and</span> myqueue[<span class="number">0</span>] == <span class="string">&#x27;n&#x27;</span>:</span><br><span class="line">                mylist.append(s_layer[::])</span><br><span class="line">                s_layer = []</span><br><span class="line">                myqueue.pop(<span class="number">0</span>)</span><br><span class="line">                myqueue.append(<span class="string">&#x27;n&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> mylist</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>剑指offer</category>
@@ -2926,20 +2930,6 @@ class="math inline">\(s_l(y_i,x,i)\)</span>是状态函数。</li>
       </tags>
   </entry>
   <entry>
-    <title>排序算法</title>
-    <url>/2019/09/09/algs/general/2019-09-10-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="归并排序">归并排序</h2>
-<p>如下归并排序的代码里，merge函数里采用了一个辅助数组temp，用来存储排序后的数组，然后再拷贝到原数组。由于排序的复杂度是n，拷贝也是n，因此复杂度是2n。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mergesort</span>(<span class="params">nums, l, r</span>):</span><br><span class="line">    <span class="keyword">if</span> l == r:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    mid = (l + r)&gt;&gt;<span class="number">1</span></span><br><span class="line">    mergesort(nums, l, mid)</span><br><span class="line">    mergesort(nums, mid+<span class="number">1</span>, r)</span><br><span class="line">    merge(nums, l, r)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">nums, l, r</span>):</span><br><span class="line">    mid = (l + r)&gt;&gt;<span class="number">1</span></span><br><span class="line">    i, j = l, mid + <span class="number">1</span></span><br><span class="line">    temp = []</span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid <span class="keyword">and</span> j &lt;= r:</span><br><span class="line">        <span class="keyword">if</span> nums[i] &lt;= nums[j]:</span><br><span class="line">            temp.append(nums[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            temp.append(nums[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid:</span><br><span class="line">        temp.append(nums[i])</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> j &lt;= r:</span><br><span class="line">        temp.append(nums[j])</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l, r + <span class="number">1</span>):</span><br><span class="line">        nums[i] = temp[i-l]   </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-      <tags>
-        <tag>partition</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>股票的最大利润</title>
     <url>/2019/09/09/algs/general/2019-09-10-%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E5%88%A9%E6%B6%A6/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可获得的最大利润是多少？</p>
@@ -2993,6 +2983,20 @@ id="至多两次买卖两次买卖之间无交叉">3.至多两次买卖，两次
       </categories>
       <tags>
         <tag>最大连续和</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>排序算法</title>
+    <url>/2019/09/09/algs/general/2019-09-10-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="归并排序">归并排序</h2>
+<p>如下归并排序的代码里，merge函数里采用了一个辅助数组temp，用来存储排序后的数组，然后再拷贝到原数组。由于排序的复杂度是n，拷贝也是n，因此复杂度是2n。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mergesort</span>(<span class="params">nums, l, r</span>):</span><br><span class="line">    <span class="keyword">if</span> l == r:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    mid = (l + r)&gt;&gt;<span class="number">1</span></span><br><span class="line">    mergesort(nums, l, mid)</span><br><span class="line">    mergesort(nums, mid+<span class="number">1</span>, r)</span><br><span class="line">    merge(nums, l, r)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">nums, l, r</span>):</span><br><span class="line">    mid = (l + r)&gt;&gt;<span class="number">1</span></span><br><span class="line">    i, j = l, mid + <span class="number">1</span></span><br><span class="line">    temp = []</span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid <span class="keyword">and</span> j &lt;= r:</span><br><span class="line">        <span class="keyword">if</span> nums[i] &lt;= nums[j]:</span><br><span class="line">            temp.append(nums[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            temp.append(nums[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid:</span><br><span class="line">        temp.append(nums[i])</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> j &lt;= r:</span><br><span class="line">        temp.append(nums[j])</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l, r + <span class="number">1</span>):</span><br><span class="line">        nums[i] = temp[i-l]   </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>刷题</category>
+      </categories>
+      <tags>
+        <tag>partition</tag>
       </tags>
   </entry>
   <entry>
